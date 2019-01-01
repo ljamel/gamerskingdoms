@@ -1,0 +1,30 @@
+{# src/OC/PlatformBundle/Resources/views/Advert/index.html.twig #}
+
+{% extends "OCPlatformBundle::layout.html.twig" %}
+
+{% block title %}
+  Accueil - {{ parent() }}
+{% endblock %}
+
+{% block ocplatform_body %}
+
+  <h2>Profil utilisateur</h2>
+
+<!-- affiche 1 si c'est du spam sinon rien -->
+
+ <!-- affiche resultat par utilisateur -->
+
+Email
+ {{ user.email }} 
+
+ID
+ {{ user.id }}
+<a href="{{ path('oc_platform_user', {'user':  user.username }) }}">{{ user.username }}</a>
+
+<br />
+
+<a href="{{ path('oc_platform_addfriend', {'id': user.id}) }}"> Demande d'amis </a>
+
+
+
+{% endblock %}

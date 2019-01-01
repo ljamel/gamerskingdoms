@@ -1,0 +1,187 @@
+# src/OC/PlatformBundle/Resources/config/routing.yml
+
+oc_platform_home:
+    path:      /index/{page}
+    defaults:
+        _controller: OCPlatformBundle:Advert:index
+        page:        1
+    requirements:
+        id: \d+
+
+oc_platform_comment:
+    path:      /comment/{id}
+    defaults:
+        _controller: OCPlatformBundle:Advert:comment
+        page:        1
+    requirements:
+        id: \d+
+# Jai resssui à faire fonctionner la pagination
+oc_platform_admin:
+    path:      /admin/{page}
+    defaults:
+        _controller: OCPlatformBundle:Advert:admin
+        page:        1
+    requirements:
+        id: \d+
+
+# Jai resssui à faire fonctionner la pagination
+oc_platform_alluser:
+    path:      /alluser/{page}{p}
+    defaults:
+        _controller: OCPlatformBundle:Advert:alluser
+        page:        1
+        p:        1
+    requirements:
+        id: \d+
+
+oc_platform_bio:
+    path:      /bio/
+    defaults:
+        _controller: OCPlatformBundle:Advert:bio
+
+oc_platform_friends:
+    path:      /friends/{id}
+    defaults:
+        _controller: OCPlatformBundle:Advert:friends
+
+oc_platform_user:
+    path:      /user/{user}
+    defaults:
+        _controller: OCPlatformBundle:Advert:user
+
+oc_platform_searchinguser:
+    path:      /searchinguser/
+    defaults:
+        _controller: OCPlatformBundle:Advert:searchinguser
+
+oc_platform_finduser:
+    path:      /finduser/{find}
+    defaults:
+        _controller: OCPlatformBundle:Advert:finduser
+        page:        1
+
+oc_platform_deleteuser:
+    path:      /deleteuser/{user}
+    defaults:
+        _controller: OCPlatformBundle:Advert:deleteuser
+        user:        1888888888888888888888888888
+
+oc_platform_deletecomment:
+    path:      /deletecomment/{id}
+    defaults:
+        _controller: OCPlatformBundle:Advert:deletecomment
+        user:        1888888888888888888888888888
+
+oc_platform_deletemessage:
+    path:      /deletemessage/{id}
+    defaults:
+        _controller: OCPlatformBundle:Advert:deletemessage
+        user:        1888888888888888888888888888
+
+oc_platform_view:
+    path:      /advert/{slug}
+    defaults:
+        _controller: OCPlatformBundle:Advert:view
+
+oc_platform_cat:
+    path:      /category/{name}
+    defaults:
+        _controller: OCPlatformBundle:Advert:category
+
+oc_platform_pagegamer:
+    path:      /pagegamer/{page}/{p}
+    defaults:
+        _controller: OCPlatformBundle:Advert:pagegamer
+        page:        1
+        p:        1
+
+oc_platform_add:
+    path:      /add
+    defaults:
+        _controller: OCPlatformBundle:Advert:add
+
+oc_platform_postprivate:
+    path:      /postprivate/{id}
+    defaults:
+        _controller: OCPlatformBundle:Advert:postprivate
+
+oc_platform_postdefi:
+    path:      /postdefi/{id}
+    defaults:
+        _controller: OCPlatformBundle:Advert:postdefi
+
+oc_platform_edit:
+    path:      /edit/{slug}
+    defaults:
+        _controller: OCPlatformBundle:Advert:edit
+    requirements:
+        id: \d+
+
+oc_platform_edituser:
+    path:      /edituser/{id}
+    defaults:
+        _controller: AppBundle:User:edituser
+    requirements:
+        id: \d+
+# pour que l'utilisateur modifi sont profile
+oc_platform_edituseractive:
+    path:      /edituseractive/
+    defaults:
+        _controller: AppBundle:User:edituseractive
+
+fos_user_security_loginn:
+    path:      /login
+    defaults:
+        _controller: AppBundle:User:login
+
+oc_platform_registernew:
+    path:      /registernew/
+    defaults:
+        _controller: AppBundle:Registrationew:registernew
+
+oc_platform_alowuser:
+    path:      /alowuser/{id}
+    defaults:
+        _controller: AppBundle:User:alowuser
+
+oc_platform_edituseradmin:
+    path:      /edituseradmin/{id}
+    defaults:
+        _controller: AppBundle:User:edituseradmin
+    requirements:
+        id: \d+
+
+oc_platform_addfriend:
+    path:      /addfriend/{id}
+    defaults:
+        _controller: OCPlatformBundle:Advert:addfriend
+    requirements:
+        id: \d+
+
+oc_platform_postprivate:
+    path:      /postprivate/{id}
+    defaults:
+        _controller: OCPlatformBundle:Advert:postprivate
+    requirements:
+        id: \d+
+
+oc_platform_messagebox:
+    path:      /messagebox/{id}
+    defaults:
+        _controller: OCPlatformBundle:Advert:messagebox
+    requirements:
+        id: \d+
+
+oc_platform_delete:
+    path:      /delete/{id}
+    defaults:
+        _controller: OCPlatformBundle:Advert:delete
+    requirements:
+        id: \d+
+
+oc_platform_purge:
+    path:     /purge/{days}
+    defaults:
+        _controller: OCPlatformBundle:Advert:purge
+    requirements:
+        days: \d+
