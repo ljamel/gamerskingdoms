@@ -1,5 +1,4 @@
 <html lang="en">
-
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,7 +9,7 @@
 	<meta name="keywords" content="game, gaming, template, HTML template, responsive, Bootstrap, premium">
 	<meta name="author" content="_nK">
 
-	<link rel="icon" type="image/png" href="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/images/favicon.png">
+	<link rel="icon" type="image/png" href="{{ path('oc_platform_link') }}../images/assets/images/favicon.png">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -20,35 +19,35 @@
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7cOpen+Sans:400,700" rel="stylesheet" type="text/css">
 
 	<!-- Bootstrap -->
-	<link rel="stylesheet" href="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/vendor/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="{{ path('oc_platform_link') }}../images/assets/vendor/bootstrap/dist/css/bootstrap.min.css">
 
 	<!-- FontAwesome -->
-	<script defer src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/vendor/fontawesome-free/js/all.js"></script>
-	<script defer src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/vendor/fontawesome-free/js/v4-shims.js"></script>
+	<script defer src="{{ path('oc_platform_link') }}../images/assets/vendor/fontawesome-free/js/all.js"></script>
+	<script defer src="{{ path('oc_platform_link') }}../images/assets/vendor/fontawesome-free/js/v4-shims.js"></script>
 
 	<!-- IonIcons -->
-	<link rel="stylesheet" href="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/vendor/ionicons/css/ionicons.min.css">
+	<link rel="stylesheet" href="{{ path('oc_platform_link') }}../images/assets/vendor/ionicons/css/ionicons.min.css">
 
 	<!-- Flickity -->
-	<link rel="stylesheet" href="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/vendor/flickity/dist/flickity.min.css">
+	<link rel="stylesheet" href="{{ path('oc_platform_link') }}../images/assets/vendor/flickity/dist/flickity.min.css">
 
 	<!-- Photoswipe -->
-	<link rel="stylesheet" type="text/css" href="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/vendor/photoswipe/dist/photoswipe.css">
-	<link rel="stylesheet" type="text/css" href="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/vendor/photoswipe/dist/default-skin/default-skin.css">
+	<link rel="stylesheet" type="text/css" href="{{ path('oc_platform_link') }}../images/assets/vendor/photoswipe/dist/photoswipe.css">
+	<link rel="stylesheet" type="text/css" href="{{ path('oc_platform_link') }}../images/assets/vendor/photoswipe/dist/default-skin/default-skin.css">
 
 	<!-- Summernote -->
-	<link rel="stylesheet" type="text/css" href="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/vendor/summernote/dist/summernote-bs4.css">
+	<link rel="stylesheet" type="text/css" href="{{ path('oc_platform_link') }}../images/assets/vendor/summernote/dist/summernote-bs4.css">
 
 	<!-- GoodGames -->
-	<link rel="stylesheet" href="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/css/goodgames.css">
+	<link rel="stylesheet" href="{{ path('oc_platform_link') }}../images/assets/css/goodgames.css">
 
 	<!-- Custom Styles -->
-	<link rel="stylesheet" href="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/css/custom.css">
+	<link rel="stylesheet" href="{{ path('oc_platform_link') }}../images/assets/css/custom.css">
 
 	<!-- END: Styles -->
 
 	<!-- jQuery -->
-	<script src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/vendor/jquery/dist/jquery.min.js"></script>
+	<script src="{{ path('oc_platform_link') }}../images/assets/vendor/jquery/dist/jquery.min.js"></script>
 	
 
 </head>
@@ -91,7 +90,7 @@
 				<div class="nk-nav-table">
 
 					<a href="{{ path('oc_platform_home') }}" class="nk-nav-logo">
-						<img src="{{ app.request.uri }}/../../images/logo.png" alt="GoodGames" width="199">
+						<img src="{{ path('oc_platform_link') }}../images/assets/images/logo.png" alt="GoodGames" width="199">
 					</a>
 
 					<ul class="nk-nav nk-nav-right d-none d-lg-table-cell" data-nav-mobile="#nk-nav-mobile">
@@ -178,7 +177,7 @@
 		<div class="nano">
 			<div class="nano-content">
 				<a href="index.html" class="nk-nav-logo">
-					<img src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/images/logo.png" alt="" width="120">
+					<img src="{{ path('oc_platform_link') }}../images/assets/images/logo.png" alt="" width="120">
 				</a>
 				<div class="nk-navbar-mobile-content">
 					<ul class="nk-nav">
@@ -226,7 +225,7 @@
 									<div class="col-lg-6">
 										<div class="nk-widget-post-2">
 											<a href="blog-article.html" class="nk-post-image">
-												<img src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/images/post-1-sm.jpg" alt="">
+												<img src="{{ path('oc_platform_link') }}../images/assets/images/post-1-sm.jpg" alt="">
 											</a>
 											<div class="nk-post-title"><a href="blog-article.html">Smell magic in the air. Or maybe barbecue</a></div>
 											<div class="nk-post-date">
@@ -239,7 +238,7 @@
 									<div class="col-lg-6">
 										<div class="nk-widget-post-2">
 											<a href="blog-article.html" class="nk-post-image">
-												<img src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/images/post-2-sm.jpg" alt="">
+												<img src="{{ path('oc_platform_link') }}../images/assets/images/post-2-sm.jpg" alt="">
 											</a>
 											<div class="nk-post-title"><a href="blog-article.html">Grab your sword and fight the Horde</a></div>
 											<div class="nk-post-date">
@@ -318,8 +317,8 @@
 
 	<!-- START: Page Background -->
 
-	<img class="nk-page-background-top" src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/images/bg-top.png" alt="">
-	<img class="nk-page-background-bottom" src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/images/bg-bottom.png" alt="">
+	<img class="nk-page-background-top" src="{{ path('oc_platform_link') }}../images/assets/images/bg-top.png" alt="">
+	<img class="nk-page-background-bottom" src="{{ path('oc_platform_link') }}../images/assets/images/bg-bottom.png" alt="">
 
 	<!-- END: Page Background -->
 
@@ -420,60 +419,59 @@
 	<!-- START: Scripts -->
 
 	<!-- Object Fit Polyfill -->
-	<script src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/vendor/object-fit-images/dist/ofi.min.js"></script>
+	<script src="{{ path('oc_platform_link') }}../images/assets/vendor/object-fit-images/dist/ofi.min.js"></script>
 
 	<!-- GSAP -->
-	<script src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/vendor/gsap/src/minified/TweenMax.min.js"></script>
-	<script src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/vendor/gsap/src/minified/plugins/ScrollToPlugin.min.js"></script>
+	<script src="{{ path('oc_platform_link') }}../images/assets/vendor/gsap/src/minified/TweenMax.min.js"></script>
+	<script src="{{ path('oc_platform_link') }}../images/assets/vendor/gsap/src/minified/plugins/ScrollToPlugin.min.js"></script>
 
 	<!-- Popper -->
-	<script src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/vendor/popper.js/dist/umd/popper.min.js"></script>
+	<script src="{{ path('oc_platform_link') }}../images/assets/vendor/popper.js/dist/umd/popper.min.js"></script>
 
 	<!-- Bootstrap -->
-	<script src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="{{ path('oc_platform_link') }}../images/assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
 
 	<!-- Sticky Kit -->
-	<script src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/vendor/sticky-kit/dist/sticky-kit.min.js"></script>
+	<script src="{{ path('oc_platform_link') }}../images/assets/vendor/sticky-kit/dist/sticky-kit.min.js"></script>
 
 
 
 	<!-- imagesLoaded -->
-	<script src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+	<script src="{{ path('oc_platform_link') }}../images/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
 
 	<!-- Flickity -->
-	<script src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/vendor/flickity/dist/flickity.pkgd.min.js"></script>
+	<script src="{{ path('oc_platform_link') }}../images/assets/vendor/flickity/dist/flickity.pkgd.min.js"></script>
 
 	<!-- Photoswipe -->
-	<script src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/vendor/photoswipe/dist/photoswipe.min.js"></script>
-	<script src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/vendor/photoswipe/dist/photoswipe-ui-default.min.js"></script>
+	<script src="{{ path('oc_platform_link') }}../images/assets/vendor/photoswipe/dist/photoswipe.min.js"></script>
+	<script src="{{ path('oc_platform_link') }}../images/assets/vendor/photoswipe/dist/photoswipe-ui-default.min.js"></script>
 
 	<!-- Jquery Validation -->
-	<script src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/vendor/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="{{ path('oc_platform_link') }}../images/assets/vendor/jquery-validation/dist/jquery.validate.min.js"></script>
 
 	<!-- Jquery Countdown + Moment -->
-	<script src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/vendor/jquery-countdown/dist/jquery.countdown.min.js"></script>
-	<script src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/vendor/moment/min/moment.min.js"></script>
-	<script src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/vendor/moment-timezone/builds/moment-timezone-with-data.min.js"></script>
+	<script src="{{ path('oc_platform_link') }}../images/assets/vendor/jquery-countdown/dist/jquery.countdown.min.js"></script>
+	<script src="{{ path('oc_platform_link') }}../images/assets/vendor/moment/min/moment.min.js"></script>
+	<script src="{{ path('oc_platform_link') }}../images/assets/vendor/moment-timezone/builds/moment-timezone-with-data.min.js"></script>
 
 	<!-- Hammer.js -->
-	<script src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/vendor/hammerjs/hammer.min.js"></script>
+	<script src="{{ path('oc_platform_link') }}../images/assets/vendor/hammerjs/hammer.min.js"></script>
 
 	<!-- SoundManager2 -->
-	<script src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/vendor/soundmanager2/script/soundmanager2-nodebug-jsmin.js"></script>
+	<script src="{{ path('oc_platform_link') }}../images/assets/vendor/soundmanager2/script/soundmanager2-nodebug-jsmin.js"></script>
 
 	<!-- Seiyria Bootstrap Slider -->
-	<script src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/vendor/bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+	<script src="{{ path('oc_platform_link') }}../images/assets/vendor/bootstrap-slider/dist/bootstrap-slider.min.js"></script>
 
 	<!-- Summernote -->
-	<script src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/vendor/summernote/dist/summernote-bs4.min.js"></script>
+	<script src="{{ path('oc_platform_link') }}../images/assets/vendor/summernote/dist/summernote-bs4.min.js"></script>
 
 	<!-- nK Share -->
-	<script src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/plugins/nk-share/nk-share.js"></script>
+	<script src="{{ path('oc_platform_link') }}../images/assets/plugins/nk-share/nk-share.js"></script>
 
 	<!-- GoodGames -->
-	<script src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/js/goodgames.min.js"></script>
-	<script src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/assets/js/goodgames-init.js"></script>
-	<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
+	<script src="{{ path('oc_platform_link') }}../images/assets/js/goodgames.min.js"></script>
+	<script src="{{ path('oc_platform_link') }}../images/assets/js/goodgames-init.js"></script>
 
 
 	</script>

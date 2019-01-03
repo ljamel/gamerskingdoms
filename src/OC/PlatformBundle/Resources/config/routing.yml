@@ -8,6 +8,9 @@ oc_platform_home:
     requirements:
         id: \d+
 
+oc_platform_link:
+    path:      /
+
 oc_platform_comment:
     path:      /comment/{id}
     defaults:

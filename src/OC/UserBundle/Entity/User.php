@@ -41,6 +41,9 @@ class User extends BaseUser
     */
 	protected $likes;
 	
+	
+  protected $user_target;
+	
   public function setLike($like)
   {
     $this->like = $like;
@@ -61,6 +64,17 @@ class User extends BaseUser
   public function getLikes()
   {
     return $this->likes;
+  }
+	
+    public function setUser_target($user_target)
+  {
+    $this->user_target = $user_target;
+  }
+
+
+  public function getUser_target()
+  {
+    return $this->user_target;
   }
 
 }
