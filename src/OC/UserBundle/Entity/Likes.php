@@ -10,20 +10,11 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 class Likes
 {
 
-  protected $likes;
 	
-  protected $user_target;
+  private $user_target;
+	
+  private $user_source;
 		
-  public function setLikes($likes)
-  {
-    $this->likes = $likes;
-  }
-
-
-  public function getLikes()
-  {
-    return $this->likes;
-  }  
 	
   public function setUser_target($user_target)
   {
@@ -34,6 +25,17 @@ class Likes
   public function getUser_target()
   {
     return $this->user_target;
+  } 
+	
+  public function setUser_source($user_source)
+  {
+    $this->user_source = $user_source;
+  }
+
+
+  public function getUser_source()
+  {
+    return $this->user_source;
   }
 
 }

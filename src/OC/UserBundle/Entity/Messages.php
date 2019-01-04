@@ -137,11 +137,7 @@ class Messages
     }
 
     /**
-     * Set date
-     *
      * @param \DateTime $date
-     *
-     * @return Messages
      */
     public function setDate($date)
     {
@@ -151,8 +147,6 @@ class Messages
     }
 
     /**
-     * Get date
-     *
      * @return \DateTime
      */
     public function getDate()

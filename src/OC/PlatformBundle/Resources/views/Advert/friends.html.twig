@@ -26,5 +26,13 @@ Invitation reçu en attente
 
 {% endfor %}
 
+<p>Les joueurs qui on aimer mon profile</p>
+{% for likess in user.likes %}
+
+<div class="nk-blog-post-border-bottom">
+	<h3><a href="{{ path('oc_platform_user', {'user': likess}) }}"> <img class="avatarliste" src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/{{likess}}avatar.jpg" alt="{{likess}}"> {{likess}} </a> </h3>
+</div>
+{% endfor %}
+
 
 {% endblock %}

@@ -9,7 +9,7 @@ oc_platform_home:
         id: \d+
 
 oc_platform_link:
-    path:      /
+    path:      /link/
 
 oc_platform_comment:
     path:      /comment/{id}

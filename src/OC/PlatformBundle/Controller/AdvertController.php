@@ -1,5 +1,5 @@
 <?php
-// src/OC/PlatformBundle/Controller/AdvertController.php
+// Crée par Blackperl1896 progfacil.com
 namespace OC\PlatformBundle\Controller;
 use OC\PlatformBundle\Entity\Advert;
 use OC\PlatformBundle\Entity\Team;
@@ -336,16 +336,10 @@ class AdvertController extends Controller
     // On calcule le nombre total de pages grâce au count($listAdverts) qui retourne le nombre total d'annonces
     $nbPages = ceil(count($listAdverts) / $nbPerPage);
 
+	$eme = $this->getDoctrine()->getManager();
 	// Création de bouton like
-	foreach ($user->getLikes() as $userd) {
-		echo ' aficheer ma boucle ';
-		echo $userd; // Affiche les personnes qui on like
-		
 
-	}
-
-		
-	
+	  	
 	
     $linkwaitingsnb = ceil(count($linkwaitings));
 	  
@@ -427,6 +421,7 @@ class AdvertController extends Controller
       'links'       => $link,
       'linkwaitings'=> $linkwaitings,
       'friendsallows'=> $friendsallowss,  
+	  'user'		 => $advert,
     ));
   }
    /**
@@ -644,19 +639,18 @@ class AdvertController extends Controller
 	// récupérer l'utilisateur courant
 	$user=$this->getUser();
 	
-	// changer l'entiter advert pour envoyer dans la bonne table
 	$advert = new Messages();
     $form   = $this->get('form.factory')->create(DefiType::class, $advert);
 	$form->remove('image');
 	
-    if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+    if ($request->isMethod('POST') && $form->handleRequest($request)) {
 	  $advert->setUserreceived($id);
 	  $advert->setAuthor($this->getUser());
       $em = $this->getDoctrine()->getManager();
       $em->persist($advert);
       $em->flush();
-      $request->getSession()->getFlashBag()->add('info', 'Message envoyé.');
- 	  return $this->redirectToRoute('oc_platform_postprivate', array(
+      $request->getSession()->getFlashBag()->add('info', 'Défi Envoyé.');
+ 	  return $this->redirectToRoute('oc_platform_postdefi', array(
       'form' => $form->createView(),
 	  'id'   => $id,
     ));
