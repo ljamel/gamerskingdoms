@@ -481,15 +481,14 @@
 	<!-- fonctionnaliter pour la chat pour l'instant fonctionne qu'en local -->
 	<script>
 		$(function() {
-			$('form').on('submit', function(event) {
+			$('#chat').on('submit', function(event) {
 				event.preventDefault();
 				var message = $('.message').first().clone();
 				var send = $('#tchatch').val();
 				message.find('p').text('{{app.user}}');
 				message.find('.messagesend').text(send);
-				message.find('.datetime').text('{{ "now"|date('
-					Y - m - d H: i: s ')}}');
-				message.find('.avatarchatsend').html('<img class="avatarchat" src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/{{app.user}}avatar.jpg">');
+				message.find('.datetime').text('{{ "now"|date('Y - m - d H: i: s ')}}');
+				message.find('.avatarchatsend').html('<img class="avatarchat" src="{{ path('oc_platform_link') }}../../images/{{app.user}}avatar.jpg">');
 				message.prependTo('.chat-container');
 				$('input').val('');
 			});

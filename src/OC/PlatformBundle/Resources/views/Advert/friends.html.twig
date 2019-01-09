@@ -10,7 +10,7 @@
 {% for friendsallow in friendsallows %}
 
 <div class="nk-blog-post-border-bottom">
-	<h3><a href="{{ path('oc_platform_user', {'user': friendsallow.username}) }}"> <img class="avatarliste" src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/{{friendsallow.username}}avatar.jpg" alt="{{friendsallow.username}}"> {{friendsallow.username}} </a> </h3>
+	<h3><a href="{{ path('oc_platform_user', {'user': friendsallow.username}) }}"> <img class="avatarliste" src="{{ path('oc_platform_link') }}../../images/{{friendsallow.username}}avatar.jpg" alt="{{friendsallow.username}}"> {{friendsallow.username}} </a> </h3>
 </div>
 
 {% endfor %}
@@ -30,7 +30,7 @@ Invitation reçu en attente
 {% for likess in user.likes %}
 
 <div class="nk-blog-post-border-bottom">
-	<h3><a href="{{ path('oc_platform_user', {'user': likess}) }}"> <img class="avatarliste" src="http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/{{likess}}avatar.jpg" alt="{{likess}}"> {{likess}} </a> </h3>
+	<h3><a href="{{ path('oc_platform_user', {'user': likess}) }}"> <img class="avatarliste" src="{{ path('oc_platform_link') }}../../images/{{likess}}avatar.jpg" alt="{{likess}}"> {{likess}} </a> </h3>
 </div>
 {% endfor %}
 

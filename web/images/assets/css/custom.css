@@ -148,7 +148,7 @@ td:hover {
 .banner {
 	height: 259px;
 	overflow: hidden;
-	background-image: url('http://localhost/symfony-rev3/mooc-symfony-iteration-16/gamers/web/images/evolve_keyart_L_2.jpg');
+	background-image: url('/web/images/evolve_keyart_L_2.jpg');
 	background-size: cover;
 }
 
@@ -266,6 +266,9 @@ input#tchatch {
 	border-color: #8DFF1C!important;
 }
 
+.messagesend {
+    color: white;
+}
 
 /* map */
 
