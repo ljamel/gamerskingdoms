@@ -11,10 +11,23 @@ oc_platform_home:
 oc_platform_link:
     path:      /link/
 
+oc_platform_updateavatar:
+    path:      /upa/
+    defaults:
+        _controller: OCPlatformBundle:Advert:updateavatar
+
 oc_platform_comment:
     path:      /comment/{id}
     defaults:
         _controller: OCPlatformBundle:Advert:comment
+        page:        1
+    requirements:
+        id: \d+
+
+oc_platform_like:
+    path:      /like/{id}
+    defaults:
+        _controller: OCPlatformBundle:Advert:like
         page:        1
     requirements:
         id: \d+

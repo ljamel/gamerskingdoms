@@ -47,7 +47,10 @@
 	<!-- END: Styles -->
 
 	<!-- jQuery -->
-	<script src="{{ path('oc_platform_link') }}../../images/assets/vendor/jquery/dist/jquery.min.js"></script>
+	<script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
 	
 
 </head>
@@ -473,8 +476,11 @@
 	<script src="{{ path('oc_platform_link') }}../../images/assets/js/goodgames.min.js"></script>
 	<script src="{{ path('oc_platform_link') }}../../images/assets/js/goodgames-init.js"></script>
 
-
-	</script>
+    {% if app.user is defined %}
+    {% set users = app.user %}
+    {% else %}
+    {% set users = 'Anonymus' %}
+    {% endif %}
 	<!-- END: Scripts -->
 
 	<!-- penser a mettre tous le javascript dans un ficher separer -->
@@ -485,7 +491,7 @@
 				event.preventDefault();
 				var message = $('.message').first().clone();
 				var send = $('#tchatch').val();
-				message.find('p').text('{{app.user}}');
+				message.find('p').text('{{users}}');
 				message.find('.messagesend').text(send);
 				message.find('.datetime').text('{{ "now"|date('Y - m - d H: i: s ')}}');
 				message.find('.avatarchatsend').html('<img class="avatarchat" src="{{ path('oc_platform_link') }}../../images/{{app.user}}avatar.jpg">');

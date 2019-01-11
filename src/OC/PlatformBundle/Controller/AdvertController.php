@@ -30,6 +30,22 @@ class AdvertController extends Controller
 {
   public function indexAction($page)
   {
+	// Pour récupérer le service UserManager du bundle
+	$userManager = $this->get('fos_user.user_manager');
+    $nbPerPage = 3; // la pagination fonctionne---------------------------èàç-rè"'-('ç"_è(-àé"'àç__çèàç-_ç))
+	// Pour récupérer la liste de tous les utilisateurs
+    $countuser = $userManager->findUsers();
+  
+    // On calcule le nombre total de pages grâce au count($listAdverts) qui retourne le nombre total d'annonces
+    $nbPages = ceil(count($countuser) / $nbPerPage);
+	  
+	$userss = $this->getDoctrine()
+      ->getManager()
+      ->getRepository('OC\UserBundle\Entity\User')
+      ->getUsers($page, $nbPerPage)
+    ;
+
+      
 	$title = $page;
     $nbPerPage = 3;
     // On récupère notre objet Paginator
@@ -95,6 +111,7 @@ class AdvertController extends Controller
 	  'index'		=> $index,
 	  'defis'		=> $defis,
 	  'wait'		=> $wait,
+      'users'       => $userss,
     ));
   }  
 	
@@ -231,8 +248,6 @@ class AdvertController extends Controller
 	
   public function alluserAction($page, $p)
   {
-    // verifi si le visiteur est connecter sinon sa renvoi à la page /login
-	$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 	// Pour récupérer le service UserManager du bundle
 	$userManager = $this->get('fos_user.user_manager');
     $nbPerPage = 6; // la pagination fonctionne---------------------------èàç-rè"'-('ç"_è(-àé"'àç__çèàç-_ç))
@@ -264,6 +279,7 @@ class AdvertController extends Controller
 	// récupérer l'utilisateur courant
 	$useractive=$this->getUser($user);
 	$advert = $userManager->findUserBy(array('id' => $user->getId()));
+            
     $nbPerPage = 3;
     $page = 1;
   
@@ -279,7 +295,6 @@ class AdvertController extends Controller
 	  
 	$bioview = $bdd->getRepository('OCPlatformBundle:Advert')->findOneBy(array('slug' => $user->getUsername() . 'bio'));
  
-	// Les amis déjà accepter, méthode multi critères utiliser if empty
 	// Les amis déjà accepter, méthode multi critères utiliser if empty
 	$friendsallow = $bdd->getRepository('OCPlatformBundle:Friends')->findBy(array('userid' => $user->getId(), 'friendswaitingid' => 1));
 	  
@@ -336,11 +351,6 @@ class AdvertController extends Controller
     // On calcule le nombre total de pages grâce au count($listAdverts) qui retourne le nombre total d'annonces
     $nbPages = ceil(count($listAdverts) / $nbPerPage);
 
-	$eme = $this->getDoctrine()->getManager();
-	// Création de bouton like
-
-	  	
-	
     $linkwaitingsnb = ceil(count($linkwaitings));
 	  
 	// Le nombre d'amis
@@ -375,6 +385,47 @@ class AdvertController extends Controller
 	  'teamviewusersall' => $teamviewusersall,
       'bioview'        => $bioview,
     ));
+  }
+    
+  public function likeAction($id) {
+    
+  	// Pour récupérer le service UserManager du bundle
+	$userManager = $this->get('fos_user.user_manager');
+      
+    // récuperer ID de l'utilisateur
+    $user = $this->getUser()->getId();
+    
+    $us = $userManager->findUserBy(array('id' => $id));
+      
+    $userss = $this->getDoctrine()
+      ->getManager()
+      ->getRepository('OC\UserBundle\Entity\User')
+      ->getAddLike($user, $id)
+    ;
+      
+    return $this->redirectToRoute('oc_platform_user', array('user' => $us));
+  }
+
+  // à finir
+  public function updateavatarAction() {
+    // Pour récupérer le service UserManager du bundle
+	$userManager = $this->get('fos_user.user_manager');
+      
+    // récuperer ID de l'utilisateur
+    $this->getUser();
+    
+    $uploaddir = 'images/';
+    $uploadfile = $uploaddir . $this->getUser() . "avatar.jpg";
+      
+    // verification avant envoi
+    if(preg_match("/\bimage\b/i", $_FILES['userfile']['type'])) {
+        if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
+            echo "Le fichier est valide, et a été téléchargé
+                   avec succès. Voici plus d'informations :\n";
+        } 
+    }
+    
+      
   }
 	
 	

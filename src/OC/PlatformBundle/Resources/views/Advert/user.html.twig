@@ -39,6 +39,13 @@
                         <tr>
                             <td>
                                 <img class="avatar" src="{{ path('oc_platform_link') }}../../{{ profileAvatar }}" alt="{{user.username}}">
+                                
+                                <form method="post" action="{{ path('oc_platform_updateavatar') }}" enctype="multipart/form-data">
+                                     
+                                     <input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
+                                     <input type="file" name="userfile" id="mon_fichier" /><br />
+                                     <input type="submit" name="submit" value="Envoyer" />
+                                </form>
                             </td>
                             <td>
                                 <table>
@@ -58,7 +65,7 @@
 											{% set i=i+1 %}
 										{% endfor %}
                                         <td><strong class="h5">j'aime:</strong>&nbsp;&nbsp;&nbsp;</td>
-                                        <td><strong class="h5">{{i}} </strong></td>
+                                        <td><strong class="h5">{{i}} 						<a href="{{ path('oc_platform_like', {'id': user.id}) }}" class="btn btn-default"> click</a></strong></td>
                                     </tr>
                                     </tbody>				
                                 </table>

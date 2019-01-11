@@ -10,7 +10,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 class AdvertRepository extends EntityRepository
 {
   public function getDefis($date) {
-  	    return $this->createQueryBuilder('a')
+  	 return $this->createQueryBuilder('a')
       ->where('a.date >= :date') // Date antérieur à :date
 	  ->setParameter('date', $date)
       ->getQuery()
@@ -121,7 +121,7 @@ class AdvertRepository extends EntityRepository
       ->getQuery()
       ->getResult()
       ;
-  }
+  }  
 
   protected function whereCurrentYear(QueryBuilder $qb)
   {

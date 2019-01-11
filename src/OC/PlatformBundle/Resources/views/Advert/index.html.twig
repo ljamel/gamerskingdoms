@@ -95,11 +95,7 @@
 <h3 class="nk-decorated-h-2"><span>{{ index.title }}</span></h3>
 <div class="nk-gap"></div>
 
-
 {{ index.content }}
-
-
-
 
 <!-- message flash -->
 {% if app.session.flashBag.has('info') %}
@@ -259,29 +255,17 @@
 				</h4>
 				<div class="nk-widget-content">
 
-					<div class="nk-widget-post">
-						<a href="blog-article.html" class="nk-post-image">
-							<img src="{{ path('oc_platform_link') }}../../images/assets/images/post-1-sm.jpg" alt="">
-						</a>
-						<h3 class="nk-post-title"><a href="blog-article.html">Smell magic in the air. Or maybe barbecue</a></h3>
-						<div class="nk-post-date"><span class="fa fa-calendar"></span> Sep 18, 2018</div>
-					</div>
-
-					<div class="nk-widget-post">
-						<a href="blog-article.html" class="nk-post-image">
-							<img src="{{ path('oc_platform_link') }}../../images/assets/images/post-2-sm.jpg" alt="">
-						</a>
-						<h3 class="nk-post-title"><a href="blog-article.html">Grab your sword and fight the Horde</a></h3>
-						<div class="nk-post-date"><span class="fa fa-calendar"></span> Sep 5, 2018</div>
-					</div>
-
-					<div class="nk-widget-post">
-						<a href="blog-article.html" class="nk-post-image">
-							<img src="{{ path('oc_platform_link') }}../../images/assets/images/post-3-sm.jpg" alt="">
-						</a>
-						<h3 class="nk-post-title"><a href="blog-article.html">We found a witch! May we burn her?</a></h3>
-						<div class="nk-post-date"><span class="fa fa-calendar"></span> Aug 27, 2018</div>
-					</div>
+                    {% for user in users|sort %}
+                       
+                        <div class="nk-widget-post">
+                            <a href="{{ path('oc_platform_user', {'user': user.username}) }}" class="nk-post-image">
+                                <img src="{{ path('oc_platform_link') }}../../images/{{user.username}}avatar.jpg" alt="">
+                            </a>
+                            <h3 class="nk-post-title"><a href="{{ path('oc_platform_user', {'user': user.username}) }}">{{user.username}}</a></h3>
+                            <div class="nk-post-date"><span class="fa fa-calendar"></span> Sep 5, 2018</div>
+                        </div>
+                    
+                    {% endfor %}
 
 				</div>
 

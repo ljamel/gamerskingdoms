@@ -1,5 +1,4 @@
 <?php
-// src/OC/PlatformBundle/Repository/CategoryRepository.php
 
 namespace OC\PlatformBundle\Repository;
 
@@ -9,7 +8,6 @@ class CategoryRepository extends EntityRepository
 {
   public function getLikeQueryBuilder($pattern)
   {
-	sleep(2);
     return $this
       ->createQueryBuilder('c')
       ->where('c.name LIKE :pattern')
