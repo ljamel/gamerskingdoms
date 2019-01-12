@@ -4,10 +4,6 @@
 	display: inherit !important;
 }
 
-.nk-navbar {
-	padding: 9px 0!important;
-	height: 65px;
-}
 
 .nk-navbar,
 .nk-navbar.nk-navbar-solid {
@@ -160,10 +156,6 @@ td:hover {
 	width: 319px;
 }
 
-.margin-left {
-	margin-left: 20px;
-}
-
 .container {
 	max-width: 1028px;
 }
@@ -276,9 +268,32 @@ input#tchatch {
 	height: 30%;
 }
 
+.nk-teammate-card .nk-teammate-card-info > table > tbody > tr > td {
+    padding: 20px 10px;
+}
+
+input[type="file"]{
+
+	width: 140px;
+	border: none;
+	border-bottom: 1px solid black;
+
+}
+
+/*user*/
+.likeme {
+    color: white;
+}
+
 @media (max-width: 560px) {
-	.nk-navbar:active {
-		padding: 9px 0!important;
-		height: 650px;
-	}
+    .nk-teammate-card .nk-teammate-card-info > table > tbody > tr + tr > td {
+         border-top: none; 
+    }
+    .nk-teammate-card .nk-teammate-card-info > table > tbody > tr > td {
+        padding: 20px 10px;
+        display: flow-root;
+    }
+    .stats {
+        display: flex;
+    }
 }

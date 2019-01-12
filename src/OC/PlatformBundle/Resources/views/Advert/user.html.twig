@@ -64,8 +64,8 @@
 										{% for likess in user.likes %}
 											{% set i=i+1 %}
 										{% endfor %}
-                                        <td><strong class="h5">j'aime:</strong>&nbsp;&nbsp;&nbsp;</td>
-                                        <td><strong class="h5">{{i}} 						<a href="{{ path('oc_platform_like', {'id': user.id}) }}" class="btn btn-default"> click</a></strong></td>
+                                        <td><strong class="h5"><a class="likeme" href="{{ path('oc_platform_like', {'id': user.id}) }}" class="btn btn-default"><i class="far fa-thumbs-up"></i> j'aime:</a></strong>&nbsp;&nbsp;&nbsp;</td>
+                                        <td><strong class="h5">{{i}}</strong></td>
                                     </tr>
                                     </tbody>				
                                 </table>
@@ -86,7 +86,7 @@
 
                             </td>
                         </tr>
-                        <tr>
+                        <tr class="stats">
                             <td>
                                 <strong class="h3">520</strong>
                             </td>
@@ -95,7 +95,7 @@
                                 <div>#5 in World Championship</div>
                             </td>
                         </tr>
-                        <tr>
+                        <tr class="stats">
                             <td>
                                 <strong class="h3">8</strong>
                             </td>
@@ -105,7 +105,7 @@
                             </td>
                         </tr>
 							
-								<tr>
+								<tr class="stats">
 									<td>
 										<a href="{{ path('oc_platform_friends', {'id': user.id}) }}"><strong class="h3">{{ nbfriends }}</strong></a>
 									</td>
