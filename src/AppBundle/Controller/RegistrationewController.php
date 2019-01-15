@@ -14,12 +14,14 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use AppBundle\Entity\User;
 use OC\PlatformBundle\Entity\Friends;
 use FOS\UserBundle\FOSUserEvents;
+use FOS\UserBundle\Event\FormEvent;
+use FOS\UserBundle\Event\FilterUserResponseEvent;
 
 class RegistrationewController extends Controller
 {
     public function registernewAction(Request $request)
     {
-		sleep(3);
+        
         /** @var $formFactory FactoryInterface */
         $formFactory = $this->get('fos_user.registration.form.factory');
         /** @var $userManager UserManagerInterface */
@@ -41,19 +43,14 @@ class RegistrationewController extends Controller
         $form->setData($user);
 		
         $form->handleRequest($request);
-		$form->remove('roles');
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 
-				// regler le problème role USER par défaut
-				$rolesArr = array('ROLE_USER');
-
 				/** @var $user \FOS\UserBundle\Model\UserInterface */
 				$user = $event->getForm()->getData();
-				$user->setRoles($rolesArr);
 				
                 $userManager->updateUser($user);
 

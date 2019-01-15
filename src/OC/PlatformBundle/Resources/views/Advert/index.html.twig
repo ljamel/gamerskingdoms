@@ -1,4 +1,10 @@
-{# src/OC/PlatformBundle/Resources/views/Advert/index.html.twig #} {% extends "OCPlatformBundle::layout.html.twig" %} {% block title %} Accueil - {{ parent() }} {% endblock %} {% block ocplatform_body %}
+{% extends "OCPlatformBundle::layout.html.twig" %} 
+
+{% block title %} 
+    Accueil - {{ parent() }} 
+{% endblock %}
+
+{% block ocplatform_body %}
 
 <style>
 	/* A utiliser pour la bacgkground image */
@@ -79,9 +85,9 @@
 
 			<tbody>
 				<tr>
-					<td>Mark <br />380 Points</td>
-					<td>Otto <br />292 Points</td>
-					<td>3mdo <br />123 Points</td>
+                    {% for user in users|sort %}
+					<td>{{user.username}} <br /> Points</td>
+                    {% endfor %}
 				</tr>
 			</tbody>
 		</table>
@@ -114,7 +120,11 @@
 		<h3 class="nk-decorated-h-2"><span><span class="text-main-1">Dernier</span> Matches</span>
 		</h3>
 		<div class="nk-gap"></div>
-		<div class="row">
+
+        
+        {% for defidirect in defidirects %}
+
+        <div class="row">
 			<div class="col-md-4">
 				<div class="nk-match-score bg-dark-3">
 					En direct
@@ -123,28 +133,29 @@
 				<div class="nk-widget-match p-0">
 					<div class="nk-widget-match-teams">
 						<div class="nk-widget-match-team-logo">
-							<img src="{{ path('oc_platform_link') }}../../images/assets/images/team-1.jpg" alt="">
+							<img src="{{ path('oc_platform_link') }}../../images/{{defidirect.author}}avatar.jpg" alt="">
 						</div>
 						<div class="nk-widget-match-vs">VS</div>
 						<div class="nk-widget-match-team-logo">
-							<img src="{{ path('oc_platform_link') }}../../images/assets/images/team-2.jpg" alt="">
+							<img src="{{ path('oc_platform_link') }}../../images/{{defidirect.userreceived}}avatar.jpg" alt="">
 						</div>
 					</div>
 				</div>
 				<div class="nk-gap-2"></div>
-				<p>As she said this she looked down at her hands and was surprised to see.</p>
-				<a href="tournaments.html" class="nk-btn nk-btn-rounded nk-btn-color-main-1">Match Details</a>
+				<p>Suivez les matches en direct.</p>
 			</div>
 			<div class="col-md-8">
 				<div class="responsive-embed responsive-embed-16x9">
-					<iframe src="https://player.twitch.tv/?channel=dakotaz" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
+					{{defidirect.content|raw}}
 				</div>
 			</div>
-		</div>
+		</div>    
+        
+		{% endfor %}	
 		<div class="nk-gap"></div>
 		
-		
-		{% for defi in defis %}
+        
+        {% for defi in defis %}
 			
 			<div class="nk-match">
 				<div class="nk-match-team-left">
@@ -221,27 +232,7 @@
 				<h4 class="nk-widget-title"><span><span class="text-main-1"></span>Chat</span>
 				</h4>
 
-  <div class="chat-container">
-    <div class="message">
-		<span class="avatarchatsend">
-			<img class="avatarchat" src="{{ path('oc_platform_link') }}../../images/adminavatar.jpg">	
-		</span>
-      <div class="datetime">{{ "now"|date('Y-m-d H:i:s')}}</div>
-      <p>{% if app.user.username is defined %}
-		  {{app.user.username}}
-		  {% else %}
-		  anonymus
-		  {% endif %}
-	  </p>
-      <p class="messagesend">Votre message ici</p>
-    </div>   
-  </div>
-  <form id="chat" class="send-message-form">
-    
-    <input id="tchatch" type="text" placeholder="Your message">
-    <button class="btn btn-primary"  type="submit">Envoyé</button>
-  </form>
-
+                <object data="https://chat.europnet.org/?chatnow=0&origine=3&channel=gamerskingdom" type="text/html" style="width:100%; height:580px;"></objet></object>
 			</div>
 
 			<div class="nk-widget nk-widget-highlighted">

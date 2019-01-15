@@ -16,6 +16,11 @@ oc_platform_updateavatar:
     defaults:
         _controller: OCPlatformBundle:Advert:updateavatar
 
+oc_platform_allteams:
+    path:      /teams/
+    defaults:
+        _controller: OCPlatformBundle:Advert:teams
+
 oc_platform_comment:
     path:      /comment/{id}
     defaults:
@@ -151,7 +156,7 @@ fos_user_security_loginn:
         _controller: AppBundle:User:login
 
 oc_platform_registernew:
-    path:      /registernew/
+    path:      /register/
     defaults:
         _controller: AppBundle:Registrationew:registernew
 

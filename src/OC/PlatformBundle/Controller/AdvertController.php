@@ -86,7 +86,16 @@ class AdvertController extends Controller
       ->getManager()
       ->getRepository('OC\UserBundle\Entity\Messages')
       ->getDefis($time)
+    ;	
+      
+    // La liste des défis a venir 
+	$defidirects = $this->getDoctrine()
+      ->getManager()
+      ->getRepository('OC\UserBundle\Entity\Messages')
+      ->getDefisdirect($time)
     ;
+      
+    // copier le code si dessus et crée un autre repository ex "getDefidirect"--((((((((((((((()))))))))))))))
 	  
 	$wait = array();
 	foreach ($defis as $defi) {
@@ -112,6 +121,7 @@ class AdvertController extends Controller
 	  'defis'		=> $defis,
 	  'wait'		=> $wait,
       'users'       => $userss,
+      'defidirects' => $defidirects,
     ));
   }  
 	
@@ -269,6 +279,18 @@ class AdvertController extends Controller
       'users'       => $userss,
     ));
   }
+    
+  public function teamsAction() {
+    $bdd = $this->getDoctrine()->getManager();
+    $teamviewusersall = $bdd->getRepository('OCPlatformBundle:Advert')->findBy(array('isteam' => true)); 
+      
+    
+	  
+    // On donne toutes les informations nécessaires à la vue
+    return $this->render('OCPlatformBundle:Advert:teams.html.twig', array(
+        'teamviewusersall' => $teamviewusersall,
+    ));
+  }
 	
   public function userAction(Request $request, $user){
 	  
@@ -307,9 +329,7 @@ class AdvertController extends Controller
 		$teamviewusers = 'ok';
 	} else {
 		$teamviewusers = $bdd->getRepository('OCPlatformBundle:Team')->findBy(array('advertid' => $teamview->getSlug())); 	
-	}
-	
-	$teamviewusersall = $bdd->getRepository('OCPlatformBundle:Advert')->findBy(array('isteam' => true)); 	
+	}	
 	  
 	$metas = $bdd
       ->getRepository('OCPlatformBundle:Advert')
@@ -382,7 +402,6 @@ class AdvertController extends Controller
 	  'form' 		=> $form->createView(),
 	  'teamview'    => $teamview,
 	  'teamviewusers' => $teamviewusers,
-	  'teamviewusersall' => $teamviewusersall,
       'bioview'        => $bioview,
     ));
   }
@@ -423,9 +442,10 @@ class AdvertController extends Controller
             echo "Le fichier est valide, et a été téléchargé
                    avec succès. Voici plus d'informations :\n";
         } 
+        return $this->redirectToRoute('oc_platform_user', array('user' => $us));  
     }
     
-      
+    return $this->redirectToRoute('oc_platform_user', array('user' => $us));  
   }
 	
 	
@@ -702,7 +722,6 @@ class AdvertController extends Controller
       $em->flush();
       $request->getSession()->getFlashBag()->add('info', 'Défi Envoyé.');
  	  return $this->redirectToRoute('oc_platform_postdefi', array(
-      'form' => $form->createView(),
 	  'id'   => $id,
     ));
     }

@@ -29,11 +29,6 @@ class User extends BaseUser
      * )
      */
   protected $groups;
-	
-	/**
-     * @ORM\Column(type="integer")
-     */
-    protected $like=0;
 
 	/**
     * @ORM\ManyToMany(targetEntity="OC\UserBundle\Entity\User", cascade={"persist"})
@@ -43,17 +38,6 @@ class User extends BaseUser
 	
 	
   protected $user_target;
-	
-  public function setLike($like)
-  {
-    $this->like = $like;
-  }
-
-
-  public function getLike()
-  {
-    return $this->like;
-  }  
 	
   public function setLikes($likes)
   {

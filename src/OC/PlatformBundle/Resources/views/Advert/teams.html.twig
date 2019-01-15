@@ -1,0 +1,14 @@
+{# src/OC/PlatformBundle/Resources/view/Advert/view.html.twig #} {% extends "OCPlatformBundle::layout.html.twig" %} {% block title %} Lecture d'une annonce - {{ parent() }} {% endblock %} {% block ocplatform_body %} 
+
+
+    <p>Affiches tous les groupes (teams)</p>
+
+    {% for user in teamviewusersall %}
+    <p>{{user.id}} menbre du groupe
+    {{user.title}} menbre du groupe
+    {{user.content}} menbre du groupe</p>
+    {% endfor %}
+
+
+
+{% endblock %}

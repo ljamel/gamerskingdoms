@@ -16,12 +16,6 @@ use OC\PlatformBundle\Entity\Friends;
  */
 class UserController extends Controller
 {
-	
-	public function loginAction()
-    { 
-		// il y a un autre chemin d'accée pour l'autentification
-		return $this->redirectToRoute('oc_platform_home');	
-    }
 
     /**
      * Displays a form to edit an existing Users.

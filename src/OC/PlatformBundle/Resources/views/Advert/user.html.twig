@@ -17,7 +17,7 @@
 					
 					{% if bioview.title is defined %}
 					{{bioview.title}}
-					{{bioview.content|raw}}
+					{{bioview.content}}
 					
 						{% if app.user == user.username %}
 						<a href="{{ path('oc_platform_edit', {'slug': user.username ~ 'bio'}) }}" class="btn btn-default"> Modifier </a>
@@ -40,12 +40,14 @@
                             <td>
                                 <img class="avatar" src="{{ path('oc_platform_link') }}../../{{ profileAvatar }}" alt="{{user.username}}">
                                 
+                                {% if app.user == user.username %}
                                 <form method="post" action="{{ path('oc_platform_updateavatar') }}" enctype="multipart/form-data">
                                      
                                      <input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
                                      <input type="file" name="userfile" id="mon_fichier" /><br />
                                      <input type="submit" name="submit" value="Envoyer" />
                                 </form>
+                                {% endif %}
                             </td>
                             <td>
                                 <table>
@@ -163,7 +165,7 @@
 							  <td class="mailbox-name">	
 								  <a href="{{ path('oc_platform_messagebox', {'id': message.id}) }}">{{ message.author }}</a>  
 							  </td>
-							  <td class="mailbox-subject"><a href="{{ path('oc_platform_messagebox', {'id': message.id}) }}"><b>Sujet : {{ message.title }}</b>  {{ message.content|truncate(50)|raw }}</a></td>
+							  <td class="mailbox-subject"><a href="{{ path('oc_platform_messagebox', {'id': message.id}) }}"><b>Sujet : {{ message.title }}</b>  {{ message.content|truncate(50) }}</a></td>
 							  <td class="mailbox-date">{{ message.date|date('d/m/Y') }}</td>
 							  <td><button type="button" class="btn btn-danger btn-xs" title="Delete" data-toggle="modal" data-target="#userDialog{{ message.id }}"><span class="glyphicon glyphicon-remove"> Effacer</span>
 							  </button></td>
@@ -224,7 +226,7 @@
 							  <td class="mailbox-name">	
 								  <a href="{{ path('oc_platform_messagebox', {'id': message.id}) }}">{{ message.userreceived }}</a>  
 							  </td>
-							  <td class="mailbox-subject"><a href="{{ path('oc_platform_messagebox', {'id': message.id}) }}"><b>Sujet : {{ message.title }}</b>  {{ message.content|truncate(50)|raw }}</a></td>
+							  <td class="mailbox-subject"><a href="{{ path('oc_platform_messagebox', {'id': message.id}) }}"><b>Sujet : {{ message.title }}</b>  {{ message.content|truncate(50) }}</a></td>
 							  <td class="mailbox-date">{{ message.date|date('d/m/Y') }}</td>
 							  <td><button type="button" class="btn btn-danger btn-xs" title="Delete" data-toggle="modal" data-target="#userDialog{{ message.id }}"><span class="glyphicon glyphicon-remove"> Effacer</span>
 							  </button></td>
@@ -251,7 +253,7 @@
 
 {% endif %}
 
-<!--
+
 {% if teamview.title is defined %}
 {{teamview.title}} teeam
 {{teamview.content}} teeam
@@ -268,23 +270,8 @@
 {% for user in teamviewusers %}
 {{user.userid}} menbre du groupe
 {% endfor %}
--->
 
 
-
-
-
-<!--
-<p>Affiches tous les groupes (teams)</p>
-
-{% for user in teamviewusersall %}
-<p>{{user.id}} menbre du groupe
-{{user.title}} menbre du groupe
-{{user.content}} menbre du groupe</p>
-{% endfor %}
-
-
--->
 
 {% endblock %}
 
