@@ -21,6 +21,11 @@ oc_platform_allteams:
     defaults:
         _controller: OCPlatformBundle:Advert:teams
 
+oc_platform_tournament:
+    path:      /tournoi/
+    defaults:
+        _controller: OCPlatformBundle:Advert:tournament
+
 oc_platform_comment:
     path:      /comment/{id}
     defaults:
@@ -36,7 +41,7 @@ oc_platform_like:
         page:        1
     requirements:
         id: \d+
-# Jai resssui à faire fonctionner la pagination
+# Jai réussi à faire fonctionner la pagination
 oc_platform_admin:
     path:      /admin/{page}
     defaults:
@@ -45,7 +50,7 @@ oc_platform_admin:
     requirements:
         id: \d+
 
-# Jai resssui à faire fonctionner la pagination
+# Jai réussi à faire fonctionner la pagination
 oc_platform_alluser:
     path:      /alluser/{page}{p}
     defaults:
@@ -149,11 +154,6 @@ oc_platform_edituseractive:
     path:      /edituseractive/
     defaults:
         _controller: AppBundle:User:edituseractive
-
-fos_user_security_loginn:
-    path:      /login
-    defaults:
-        _controller: AppBundle:User:login
 
 oc_platform_registernew:
     path:      /register/

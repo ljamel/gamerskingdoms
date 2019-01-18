@@ -42,9 +42,11 @@
 
 			<tbody>
 				<tr>
-					<td>Mark <br />380 Points</td>
-					<td>Otto <br />292 Points</td>
-					<td>3mdo <br />123 Points</td>
+                    {% for user in userstat|sort %}
+                    <td  class="statp"><a href="{{ path('oc_platform_user', {'user': user.username}) }}">{{user.username}}</a> <br />
+                        <span>230 <br />Points</span> 
+                    </td>
+                    {% endfor %}
 				</tr>
 			</tbody>
 		</table>
@@ -63,9 +65,11 @@
 		<table class="table table-hover table-dark">
 			<tbody>
 				<tr>
-					<td>Mark <br />380 Points</td>
-					<td>Otto <br />292 Points</td>
-					<td>3mdo <br />123 Points</td>
+                    {% for user in userstat|sort %}
+                    <td  class="statp"><a href="{{ path('oc_platform_user', {'user': user.username}) }}">{{user.username}}</a> <br />
+                        <span>230 <br />Points</span> 
+                    </td>
+                    {% endfor %}
 				</tr>
 			</tbody>
 		</table>
@@ -85,8 +89,10 @@
 
 			<tbody>
 				<tr>
-                    {% for user in users|sort %}
-					<td>{{user.username}} <br /> Points</td>
+                    {% for user in userstat|sort %}
+                    <td  class="statp"><a href="{{ path('oc_platform_user', {'user': user.username}) }}">{{user.username}}</a> <br />
+                        <span>230 <br />Points</span> 
+                    </td>
                     {% endfor %}
 				</tr>
 			</tbody>
@@ -101,7 +107,10 @@
 <h3 class="nk-decorated-h-2"><span>{{ index.title }}</span></h3>
 <div class="nk-gap"></div>
 
-{{ index.content }}
+{% for listAdvert in listAdverts|slice(0,3) %}
+    <h2>{{listAdvert.title}}</h2>
+    <p>{{listAdvert.content|raw}}</p>
+{% endfor %}
 
 <!-- message flash -->
 {% if app.session.flashBag.has('info') %}
@@ -164,8 +173,8 @@
 								<img class="nk-match-team-logo-mini" src="{{ path('oc_platform_link') }}../../images/{{defi.author}}avatar.jpg" alt="">
 						</span>
 						<span class="nk-match-team-name">
-								{{defi.author}}
-							</span>
+				            {{defi.author}}
+				        </span>
 					</a>
 				</div>
 				<div class="nk-match-status">
@@ -236,7 +245,7 @@
 			</div>
 
 			<div class="nk-widget nk-widget-highlighted">
-				<h4 class="nk-widget-title"><span><span class="text-main-1">Top 3</span> Joueurs</span>
+				<h4 class="nk-widget-title"><span><span class="text-main-1">Top 5</span> Joueurs</span>
 				</h4>
 				<div class="nk-widget-content">
 
@@ -267,8 +276,6 @@
 	</div>
 </div>
 
-
-	<!-- google map avec geolocalisation 
     <script>
       // Note: This example requires that you consent to location sharing when
       // prompted by your browser. If you see the error "The Geolocation service
@@ -278,7 +285,7 @@
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: -34.397, lng: 150.644},
-          zoom: 6
+          zoom: 4
         });
         infoWindow = new google.maps.InfoWindow;
 
@@ -290,10 +297,20 @@
               lng: position.coords.longitude
             };
 
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
-            infoWindow.open(map);
             map.setCenter(pos);
+              
+            // Position du marker cercle
+            var marker = new google.maps.Marker({
+                
+                position: pos,
+                icon: {
+                    path: google.maps.SymbolPath.CIRCLE,
+                    scale: 90,
+                    strokeOpacity: 0.2,
+                },
+                draggable: true,
+                map: map
+            });
           }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
           });
@@ -313,5 +330,5 @@
     </script>
 
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGmV-zl2q_1T01QCjt0C1X2ZYve-LEqsA&callback=initMap "></script>
--->
+
 {% endblock %}

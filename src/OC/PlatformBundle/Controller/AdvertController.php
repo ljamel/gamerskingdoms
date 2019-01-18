@@ -32,7 +32,7 @@ class AdvertController extends Controller
   {
 	// Pour récupérer le service UserManager du bundle
 	$userManager = $this->get('fos_user.user_manager');
-    $nbPerPage = 3; // la pagination fonctionne---------------------------èàç-rè"'-('ç"_è(-àé"'àç__çèàç-_ç))
+    $nbPerPage = 5; // la pagination fonctionne---------------------------èàç-rè"'-('ç"_è(-àé"'àç__çèàç-_ç))
 	// Pour récupérer la liste de tous les utilisateurs
     $countuser = $userManager->findUsers();
   
@@ -43,6 +43,12 @@ class AdvertController extends Controller
       ->getManager()
       ->getRepository('OC\UserBundle\Entity\User')
       ->getUsers($page, $nbPerPage)
+    ;	
+    
+    $userstat = $this->getDoctrine()
+      ->getManager()
+      ->getRepository('OC\UserBundle\Entity\User')
+      ->getUsers($page, 5)
     ;
 
       
@@ -52,20 +58,16 @@ class AdvertController extends Controller
     $listAdverts = $this->getDoctrine()
       ->getManager()
       ->getRepository('OCPlatformBundle:Advert')
-      ->getAdverts($page, $nbPerPage)
-    ;
+    ; 
+    $actu = array('cat' => 'actualité');
+    $listAdverts = $listAdverts->getAdvertWithCategories($actu);
+
     // On calcule le nombre total de pages grâce au count($listAdverts) qui retourne le nombre total d'annonces
     $nbPages = ceil(count($listAdverts) / $nbPerPage);
     // Si la page n'existe pas, on retourne une 404
     if ($page > $nbPages) {
       throw $this->createNotFoundException("La page ".$page." n'existe pas.");
     }
-	// Récupération des AdvertSkill de l'annonce
-    $listAdvertSkills = $this->getDoctrine()
-      ->getManager()
-      ->getRepository('OCPlatformBundle:Category')
-      ->findAll()
-    ;	
 	  
 	// Pour les meta tags et titre - - ----------
 	$metas = $this->getDoctrine()
@@ -78,9 +80,10 @@ class AdvertController extends Controller
       ->getManager()
       ->getRepository('OCPlatformBundle:Advert')
       ->findOneBy(array('id' => 1), array('id' => 'desc'))
-    ;
+    ;	
+
+      
 	$time = date('Y-m-d H:i:s');
-  
 	// La liste des défis a venir 
 	$defis = $this->getDoctrine()
       ->getManager()
@@ -88,7 +91,7 @@ class AdvertController extends Controller
       ->getDefis($time)
     ;	
       
-    // La liste des défis a venir 
+    // La liste des défis en direct 
 	$defidirects = $this->getDoctrine()
       ->getManager()
       ->getRepository('OC\UserBundle\Entity\Messages')
@@ -113,7 +116,6 @@ class AdvertController extends Controller
     // On donne toutes les informations nécessaires à la vue
     return $this->render('OCPlatformBundle:Advert:index.html.twig', array(
       'listAdverts' => $listAdverts,
-      'listAdvertSkills' => $listAdvertSkills,
       'nbPages'     => $nbPages,
       'page'        => $page,
       'metatag'     => $metas,
@@ -121,6 +123,7 @@ class AdvertController extends Controller
 	  'defis'		=> $defis,
 	  'wait'		=> $wait,
       'users'       => $userss,
+      'userstat'    => $userstat,
       'defidirects' => $defidirects,
     ));
   }  
@@ -283,13 +286,27 @@ class AdvertController extends Controller
   public function teamsAction() {
     $bdd = $this->getDoctrine()->getManager();
     $teamviewusersall = $bdd->getRepository('OCPlatformBundle:Advert')->findBy(array('isteam' => true)); 
-      
-    
 	  
     // On donne toutes les informations nécessaires à la vue
     return $this->render('OCPlatformBundle:Advert:teams.html.twig', array(
         'teamviewusersall' => $teamviewusersall,
     ));
+  }
+
+  public function tournamentAction() {
+    
+    $time = date('Y-m-d H:i:s');
+      // La liste des défis en direct 
+	  $defidirects = $this->getDoctrine()
+      ->getManager()
+      ->getRepository('OC\UserBundle\Entity\Messages')
+      ->getDefisall($time)
+    ;
+      
+    // On donne toutes les informations nécessaires à la vue
+    return $this->render('OCPlatformBundle:Advert:tournament.html.twig', array(
+        'defidirects' => $defidirects,
+    )); 
   }
 	
   public function userAction(Request $request, $user){
@@ -375,6 +392,7 @@ class AdvertController extends Controller
 	  
 	// Le nombre d'amis
 	$nbfriends = ceil(count($friendsallow));
+      
 	$avatar = new AvatarFactory();
     $profileAvatar = $avatar->generate(new ProfileAvatar(140, 140)); 
 	$image = 'images/' . $user->getUsername() . 'avatar.jpg';
@@ -382,7 +400,7 @@ class AdvertController extends Controller
 		$gravatar = $image;
 	} else {
 		$gravatar = $profileAvatar->save('', $image);
-	}
+	} 
 	  
 	  
     // On donne toutes les informations nécessaires à la vue
@@ -651,9 +669,9 @@ class AdvertController extends Controller
     $page = 1;
   
 	$bdd = $this->getDoctrine()->getManager();
-	  
+    $user->getUsername();
 	// ajouter des critèrs de séléctions pour la sécurité et afficher un message a la fois
-	$messages = $bdd->getRepository('OC\UserBundle\Entity\Messages')->findBy(array('userreceived' => $user->getUsername(), 'id' => $id));
+	$messages = $bdd->getRepository('OC\UserBundle\Entity\Messages')->findBy(array('author' => $user->getUsername(), 'id' => $id));
 	  
     $nbPages = ceil(count($messages) / $nbPerPage);
 	  

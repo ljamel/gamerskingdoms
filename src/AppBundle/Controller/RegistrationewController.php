@@ -65,6 +65,7 @@ class RegistrationewController extends Controller
 					
 
                     $url = $this->generateUrl('fos_user_registration_confirmed');
+                    $request->getSession()->getFlashBag()->add('notice', 'Bienvenue nouveau gamer.');
                     $response = new RedirectResponse($url);
                 }
 

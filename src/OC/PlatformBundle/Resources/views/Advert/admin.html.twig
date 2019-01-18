@@ -1,4 +1,6 @@
-
+					<a href="{{ path('oc_platform_home') }}" class="nk-nav-logo">
+						<img src="{{ path('oc_platform_link') }}../../images/assets/images/logo.png" alt="GoodGames" width="199">
+					</a>
 
 {% block ocplatform_body %}
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -167,8 +169,7 @@
 					<td>{{ user.username }}</td>
 					<td>{{ user.email }}</td>
 					<td>
-						
-						{% if user.roles == 'ROLE_ADMIN' %} Admin {% else %} User {% endif %}
+                        {{ user.roles|join('|') }}
 					</td>
 					<td>
 

@@ -8,16 +8,23 @@
 
 {% block ocplatform_body %}
 
-
+<!-- message flash -->
+    {% if app.session.flashBag.has('notice') %}
+        <div class="alert alert-info">
+            {% for msg in app.session.flashBag.get('notice') %}
+                {{ msg }}
+            {% endfor %}
+        </div>
+    {% endif %}
 
 
 <div class="nk-teammate-card">
                 <div class="nk-teammate-card-photo bio">
-                    <h1>Biographie</h1>
+                    <h1>Profil</h1>
 					
 					{% if bioview.title is defined %}
 					{{bioview.title}}
-					{{bioview.content}}
+					{{bioview.content|raw}}
 					
 						{% if app.user == user.username %}
 						<a href="{{ path('oc_platform_edit', {'slug': user.username ~ 'bio'}) }}" class="btn btn-default"> Modifier </a>

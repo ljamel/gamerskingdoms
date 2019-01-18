@@ -16,24 +16,12 @@
         </div>
     {% endif %}
 
-  <div style="float: left; margin-right: 1em;">
-    {# On vérifie qu'une image soit bien associée à l'article #}
-    {% if advert.image is not null %}
-      <img
-        src="{{ asset(advert.image.webPath) }}"
-        alt="{{ advert.image.alt }}"
-        height="60"
-      />
-    {% endif %}
-  </div>
-
   <h2>{{ advert.title }}</h2>
-  <i>Par {{ advert.author }}, le {{ advert.date|date('d/m/Y') }}</i>
 		  {% if advert.image is not null %}
 		    <img src="{{ advert.image.url }}" alt="{{ advert.image.alt }}">
 		  {% endif %}
   <div class="well">
-    {{ advert.content }}
+    {{ advert.content|raw }}
   </div>
   {% if not advert.categories.empty %}
     <p>
@@ -54,7 +42,7 @@
       </ul>
     </div>
   {% endif %}
-
+  <i>Par {{ advert.author }}, le {{ advert.date|date('d/m/Y') }}</i>
 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
   <p>
     <a href="{{ path('oc_platform_home') }}" class="btn btn-default">

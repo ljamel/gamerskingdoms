@@ -1,14 +1,24 @@
 {# src/OC/PlatformBundle/Resources/view/Advert/view.html.twig #} {% extends "OCPlatformBundle::layout.html.twig" %} {% block title %} Lecture d'une annonce - {{ parent() }} {% endblock %} {% block ocplatform_body %} 
 
-
-    <p>Affiches tous les groupes (teams)</p>
-
+<div class="bodysingle">
     {% for user in teamviewusersall %}
-    <p>{{user.id}} menbre du groupe
-    {{user.title}} menbre du groupe
-    {{user.content}} menbre du groupe</p>
+        
+        <p>
+            <a href="{{ path('oc_platform_view', {'slug': user.slug}) }}">{{ user.title }}</a>
+        </p>
+        {# On vérifie qu'une image soit bien associée à l'article #}
+        {% if user.image is not null %}
+        
+        <a href="{{ path('oc_platform_view', {'slug': user.slug}) }}">
+            <img class="banner" src="{{ user.image.url }}" alt="{{ user.image.alt }}">
+        </a>
+        
+        {% endif %}
+        <p>{{user.content|raw }}</p> 
+        <p>Administateur du groupe<a href="{{ path('oc_platform_user', {'user': user.author}) }}">{{user.author}}</a></p>
+        <h3 class="nk-decorated-h-2"></h3>
     {% endfor %}
-
+</div>
 
 
 {% endblock %}

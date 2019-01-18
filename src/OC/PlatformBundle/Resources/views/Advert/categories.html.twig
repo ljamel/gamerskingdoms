@@ -7,19 +7,21 @@
 {% endblock %}
 
 {% block ocplatform_body %}
-
- <ul>	 
-     {% for advert in adverts %}
-      <li>
-        <a href="{{ path('oc_platform_view', {'slug': advert.slug}) }}">
-          {{ advert.title }}
-        </a>
-        par {{ advert.author }},
-        le {{ advert.date|date('d/m/Y') }}	 
-      </li>
-	  <p>{{ advert.content | truncate(150) | raw }}</p>
-    {% else %}
-      <li>Pas (encore !) d'annonces</li>
-    {% endfor %}
-</ul>
+<div class="bodysingle">
+    	 
+         {% for advert in adverts %}
+          
+            <a href="{{ path('oc_platform_view', {'slug': advert.slug}) }}">
+              {{ advert.title }}
+            </a>
+            par {{ advert.author }},
+            le {{ advert.date|date('d/m/Y') }}	 
+            <p>{{ advert.content | truncate(150) | raw }}</p>
+            <h3 class="nk-decorated-h-2"></h3>
+        {% else %}    
+          <p>Pas (encore !) d'annonces</p> 
+        {% endfor %}
+    
+    
+</div>
 {% endblock %}

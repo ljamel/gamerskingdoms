@@ -1,0 +1,39 @@
+{# src/OC/PlatformBundle/Resources/view/Advert/view.html.twig #} {% extends "OCPlatformBundle::layout.html.twig" %} {% block title %} Lecture d'une annonce - {{ parent() }} {% endblock %} {% block ocplatform_body %} 
+
+
+<p>Affichages des vidéos de tournoi</p>
+
+        {% for defidirect in defidirects %}
+
+        <div class="row">
+			<div class="col-md-4">
+				<div class="nk-match-score bg-dark-3">
+					En direct
+				</div>
+				<div class="nk-gap-2"></div>
+				<div class="nk-widget-match p-0">
+					<div class="nk-widget-match-teams">
+						<div class="nk-widget-match-team-logo">
+							<img src="{{ path('oc_platform_link') }}../../images/{{defidirect.author}}avatar.jpg" alt="">
+						</div>
+						<div class="nk-widget-match-vs">VS</div>
+						<div class="nk-widget-match-team-logo">
+							<img src="{{ path('oc_platform_link') }}../../images/{{defidirect.userreceived}}avatar.jpg" alt="">
+						</div>
+					</div>
+				</div>
+				<div class="nk-gap-2"></div>
+				<p>{{defidirect.title}}</p>
+			</div>
+			<div class="col-md-8">
+				<div class="responsive-embed responsive-embed-16x9">
+					{{defidirect.content|raw}}
+				</div>
+			</div>
+		</div> 
+        <p></p>
+        <h3 class="nk-decorated-h-2"></h3>
+        
+		{% endfor %}
+
+{% endblock %}

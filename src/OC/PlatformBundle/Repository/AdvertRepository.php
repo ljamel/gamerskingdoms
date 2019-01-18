@@ -10,7 +10,20 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 class AdvertRepository extends EntityRepository
 {
   public function getDefis($date) {
-     $datem = date('Y-m-d H:i:s', strtotime('-10 hour'));
+     $datem = date('Y-m-d H:i:s', strtotime('+20 hour'));
+  	 return $this->createQueryBuilder('a')
+      ->where('a.date <= :datem') // Date antérieur à :date
+      ->andWhere('a.date >= :date') // Date supérieur à :datem
+	  ->setParameter('datem', $datem)
+	  ->setParameter('date', $date)
+      ->getQuery()
+      ->getResult()
+      ;
+  }  
+
+  public function getDefisdirect($date) {
+      
+     $datem = date('Y-m-d H:i:s', strtotime('-2 hour'));
   	 return $this->createQueryBuilder('a')
       ->where('a.date <= :date') // Date antérieur à :date
       ->andWhere('a.date >= :datem') // Date supérieur à :datem
@@ -20,10 +33,10 @@ class AdvertRepository extends EntityRepository
       ->getResult()
       ;
   }  
-
-  public function getDefisdirect($date) {
+  
+  public function getDefisall($date) {
       
-     $datem = date('Y-m-d H:i:s', strtotime('-2 hour'));
+     $datem = date('Y-m-d H:i:s', strtotime('-120 hour'));
   	 return $this->createQueryBuilder('a')
       ->where('a.date <= :date') // Date antérieur à :date
       ->andWhere('a.date >= :datem') // Date supérieur à :datem
