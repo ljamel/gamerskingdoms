@@ -42,7 +42,7 @@
 
 			<tbody>
 				<tr>
-                    {% for user in userstat|sort %}
+                    {% for user in userstat %}
                     <td  class="statp"><a href="{{ path('oc_platform_user', {'user': user.username}) }}">{{user.username}}</a> <br />
                         <span>230 <br />Points</span> 
                     </td>
@@ -249,13 +249,13 @@
 				</h4>
 				<div class="nk-widget-content">
 
-                    {% for user in users|sort %}
+                    {% for user in users|slice(0,5) %}
                        
                         <div class="nk-widget-post">
-                            <a href="{{ path('oc_platform_user', {'user': user.username}) }}" class="nk-post-image">
-                                <img src="{{ path('oc_platform_link') }}../../images/{{user.username}}avatar.jpg" alt="">
+                            <a href="{{ path('oc_platform_user', {'user': user.author}) }}" class="nk-post-image">
+                                <img src="{{ path('oc_platform_link') }}../../images/{{user.author}}avatar.jpg" alt="">
                             </a>
-                            <h3 class="nk-post-title"><a href="{{ path('oc_platform_user', {'user': user.username}) }}">{{user.username}}</a></h3>
+                            <h3 class="nk-post-title"><a href="{{ path('oc_platform_user', {'user': user.author}) }}">{{user.author}}</a></h3>
                             <div class="nk-post-date"><span class="fa fa-calendar"></span> Sep 5, 2018</div>
                         </div>
                     

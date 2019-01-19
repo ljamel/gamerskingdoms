@@ -34,10 +34,12 @@ class User extends BaseUser
     * @ORM\ManyToMany(targetEntity="OC\UserBundle\Entity\User", cascade={"persist"})
     * @ORM\JoinTable(name="likes")
     */
-	protected $likes;
+  protected $likes;
 	
 	
   protected $user_target;
+    
+  protected $points;
 	
   public function setLikes($likes)
   {
@@ -59,6 +61,17 @@ class User extends BaseUser
   public function getUser_target()
   {
     return $this->user_target;
+  }    
+    
+  public function setPoints($points)
+  {
+    $this->points = $points;
+  }
+
+
+  public function getPoints()
+  {
+    return $this->points;
   }
 
 }

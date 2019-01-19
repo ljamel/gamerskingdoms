@@ -263,7 +263,7 @@
 
 {% if teamview.title is defined %}
 {{teamview.title}} teeam
-{{teamview.content}} teeam
+{{teamview.content|raw}} teeam
 {% else %}
 
 <a href="{{ path('fos_user_group_new')}}"> Crée une team </a> 

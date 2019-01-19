@@ -109,6 +109,7 @@ class AdvertRepository extends EntityRepository
     return $results;
   }
 
+  // ceci est un exemple
   public function myFind()
   {
     $qb = $this->createQueryBuilder('a');
@@ -124,6 +125,19 @@ class AdvertRepository extends EntityRepository
 
     // On peut ajouter ce qu'on veut après
     $qb->orderBy('a.date', 'DESC');
+
+    return $qb
+      ->getQuery()
+      ->getResult()
+    ;
+  }
+    
+  public function getTop()
+  {
+    $qb = $this->createQueryBuilder('a');
+
+    // On peut ajouter ce qu'on veut après
+    $qb->orderBy('a.authorpoints', 'DESC');
 
     return $qb
       ->getQuery()

@@ -41,6 +41,13 @@ class User extends BaseUser
      * )
      */
     protected $name;
+    
+  /**
+   * @var int
+   *
+   * @ORM\Column(name="points")
+   */
+    protected $points;
 	
 
 	public function getRoles(): array
@@ -73,5 +80,16 @@ class User extends BaseUser
   {
     return $this->name;
   }  
+    
+  public function setPoints($points)
+  {
+    $this->points = $points;
+  }
+
+
+  public function getPoints()
+  {
+    return $this->points;
+  }
 
 }

@@ -39,10 +39,12 @@ class AdvertController extends Controller
     // On calcule le nombre total de pages grâce au count($listAdverts) qui retourne le nombre total d'annonces
     $nbPages = ceil(count($countuser) / $nbPerPage);
 	  
+    // affichage du top 5
+    // Ne pas oublier d'incrementer tous les points en base de donner user
 	$userss = $this->getDoctrine()
       ->getManager()
-      ->getRepository('OC\UserBundle\Entity\User')
-      ->getUsers($page, $nbPerPage)
+      ->getRepository('OC\UserBundle\Entity\Messages')
+      ->getTop()
     ;	
     
     $userstat = $this->getDoctrine()
@@ -89,7 +91,7 @@ class AdvertController extends Controller
       ->getManager()
       ->getRepository('OC\UserBundle\Entity\Messages')
       ->getDefis($time)
-    ;	
+    ;
       
     // La liste des défis en direct 
 	$defidirects = $this->getDoctrine()

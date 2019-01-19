@@ -9,6 +9,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use AppBundle\Entity\User;
 use OC\PlatformBundle\Entity\Friends;
+use OC\UserBundle\Entity\Messages;
 
 /**
  * User controller.
@@ -53,6 +54,26 @@ class UserController extends Controller
         ));
 		
 	} 
+    
+    public function editstatAction(Request $request, $id){
+        $em = $this->get('fos_user.user_manager');
+		
+		// récupérer l'utilisateur courant
+		$user=$this->getUser();
+		$userc = $em->findUserBy(array('id' => $user->getId()));
+		var_dump((string)$this->getUser());
+		// connection en base de donnée
+		$bdd = $this->getDoctrine()->getManager();
+		$message = $bdd->getRepository('OC\UserBundle\Entity\Messages')->findOneBy(array('id' => $id, 'author' => (string)$this->getUser()));
+		
+        // pas besoin de persist() quand on veut update	
+        // Ajouter deux tables pour relier le nombre de points a l'utilisateur et incrémenté le tous----
+		$message->setUserreceivedpoints((string)$_POST['userreceivedpoints']);		
+		$message->setAuthorpoints((string)$_POST['authorpoints']);
+		$bdd->flush();
+		$request->getSession()->getFlashBag()->add('notice', "Statistiques changer !");	
+        return $this->redirectToRoute('oc_platform_user', array('user' => (string)$this->getUser()));
+    }
 	
 	// modifier son profile
 	public function edituseractiveAction(Request $request)

@@ -39,7 +39,21 @@ class Messages
    *
    * @ORM\Column(name="userreceived", type="string", length=255)
    */
-  private $userreceived;
+  private $userreceived;  
+    
+  /**
+   * @var int
+   *
+   * @ORM\Column(name="userreceivedpoints", type="string", length=255)
+   */
+  private $userreceivedpoints;  
+    
+  /**
+   * @var int
+   *
+   * @ORM\Column(name="Authorpoints", type="string", length=255)
+   */
+  private $authorpoints;
 
   /**
    * @var \DateTime
@@ -224,5 +238,29 @@ class Messages
     public function getContent()
     {
         return $this->content;
+    }  
+
+    public function setUserreceivedpoints($userreceivedpoints)
+    {
+        $this->userreceivedpoints = $userreceivedpoints;
+
+        return $this;
+    }
+
+    public function getuserreceivedpoints()
+    {
+        return $this->userreceivedpoints;
+    }    
+    
+    public function setAuthorpoints($authorpoints)
+    {
+        $this->authorpoints = $authorpoints;
+
+        return $this;
+    }
+
+    public function getAuthorpoints()
+    {
+        return $this->authorpoints;
     }
 }

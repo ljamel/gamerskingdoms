@@ -155,6 +155,11 @@ oc_platform_edituseractive:
     defaults:
         _controller: AppBundle:User:edituseractive
 
+oc_platform_editstat:
+    path:      /editstat/{id}
+    defaults:
+        _controller: AppBundle:User:editstat
+
 oc_platform_registernew:
     path:      /register/
     defaults:

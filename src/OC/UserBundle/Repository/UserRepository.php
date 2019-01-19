@@ -16,8 +16,8 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
   public function getUsers($page, $nbPerPage)
   {
 	if(is_numeric($page)) {
-		$query = $this->createQueryBuilder('a')
-		  ->orderBy('a.id', 'DESC')
+		$query = $this->createQueryBuilder('c')
+		  ->orderBy('c.id', 'DESC')
 		  ->getQuery()
 		;
 
@@ -36,7 +36,20 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
     
   public function getAddLike($user, $id)
   {
-
+      
+    // link with user and usertarget i use manytomany in my entitie name table "likes"
+    try{
+            $PDO = new PDO('mysql:host=gamerskigf1896.mysql.db;dbname=gamerskigf1896','gamerskigf1896','Blackperl1896');
+            $PDO->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+            $PDO->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_OBJ);
+        }catch(PDOException $e){
+            echo 'Connexion impossible';
+    }
+       
+    $stmt = $PDO->prepare("INSERT INTO likes (user_source, user_target) VALUES (:name, :value)");
+    $stmt->bindValue(':name', $id);
+    $stmt->bindValue(':value', $user);
+    $stmt->execute();
 
       
   }
