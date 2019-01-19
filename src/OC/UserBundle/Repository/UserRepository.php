@@ -17,7 +17,7 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
   {
 	if(is_numeric($page)) {
 		$query = $this->createQueryBuilder('c')
-		  ->orderBy('c.id', 'DESC')
+		  ->orderBy('c.points', 'DESC')
 		  ->getQuery()
 		;
 
@@ -39,7 +39,7 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
       
     // link with user and usertarget i use manytomany in my entitie name table "likes"
     try{
-            $PDO = new PDO('mysql:host=gamerskigf1896.mysql.db;dbname=gamerskigf1896','gamerskigf1896','Blackperl1896');
+            $PDO = new PDO('mysql:host=127.0.0.1;dbname=symfony','root','root');
             $PDO->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
             $PDO->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_OBJ);
         }catch(PDOException $e){

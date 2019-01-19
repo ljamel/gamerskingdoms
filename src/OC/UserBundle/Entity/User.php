@@ -38,7 +38,11 @@ class User extends BaseUser
 	
 	
   protected $user_target;
-    
+  
+    // utiliser l'annotation si dessous pour que le nouveau champ soit prise en compte
+	/**
+    * @ORM\Column(name="points", type="integer")
+    */
   protected $points;
 	
   public function setLikes($likes)

@@ -43,8 +43,8 @@ class AdvertController extends Controller
     // Ne pas oublier d'incrementer tous les points en base de donner user
 	$userss = $this->getDoctrine()
       ->getManager()
-      ->getRepository('OC\UserBundle\Entity\Messages')
-      ->getTop()
+      ->getRepository('OC\UserBundle\Entity\User')
+      ->getUsers($page, 5)
     ;	
     
     $userstat = $this->getDoctrine()

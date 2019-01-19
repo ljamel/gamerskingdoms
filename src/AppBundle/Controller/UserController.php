@@ -61,15 +61,22 @@ class UserController extends Controller
 		// récupérer l'utilisateur courant
 		$user=$this->getUser();
 		$userc = $em->findUserBy(array('id' => $user->getId()));
-		var_dump((string)$this->getUser());
 		// connection en base de donnée
 		$bdd = $this->getDoctrine()->getManager();
 		$message = $bdd->getRepository('OC\UserBundle\Entity\Messages')->findOneBy(array('id' => $id, 'author' => (string)$this->getUser()));
+        
+        $user = $em->findUserByUsername((string)$user); // get user by username
+        
+        $tot = (int)$_POST['authorpoints'] + (int)$user->getPoints() - (int)$_POST['userreceivedpoints'];
+        
+        $user->setPoints($tot);
+
+        $em->updateUser($user);
 		
-        // pas besoin de persist() quand on veut update	
+        // pas besoin de persist() quand on veut update
         // Ajouter deux tables pour relier le nombre de points a l'utilisateur et incrémenté le tous----
-		$message->setUserreceivedpoints((string)$_POST['userreceivedpoints']);		
-		$message->setAuthorpoints((string)$_POST['authorpoints']);
+		$message->setUserreceivedpoints((int)$_POST['userreceivedpoints']);		
+		$message->setAuthorpoints((int)$_POST['authorpoints']);
 		$bdd->flush();
 		$request->getSession()->getFlashBag()->add('notice', "Statistiques changer !");	
         return $this->redirectToRoute('oc_platform_user', array('user' => (string)$this->getUser()));
