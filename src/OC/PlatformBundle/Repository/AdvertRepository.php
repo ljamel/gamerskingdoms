@@ -14,8 +14,10 @@ class AdvertRepository extends EntityRepository
   	 return $this->createQueryBuilder('a')
       ->where('a.date <= :datem') // Date antérieur à :date
       ->andWhere('a.date >= :date') // Date supérieur à :datem
+      ->andWhere('a.authorpoints >= :points')
 	  ->setParameter('datem', $datem)
 	  ->setParameter('date', $date)
+	  ->setParameter('points', 0)
       ->getQuery()
       ->getResult()
       ;
@@ -27,8 +29,10 @@ class AdvertRepository extends EntityRepository
   	 return $this->createQueryBuilder('a')
       ->where('a.date <= :date') // Date antérieur à :date
       ->andWhere('a.date >= :datem') // Date supérieur à :datem
+      ->andWhere('a.authorpoints >= :points')
 	  ->setParameter('date', $date)
 	  ->setParameter('datem', $datem)
+      ->setParameter('points', 0)
       ->getQuery()
       ->getResult()
       ;
@@ -40,8 +44,10 @@ class AdvertRepository extends EntityRepository
   	 return $this->createQueryBuilder('a')
       ->where('a.date <= :date') // Date antérieur à :date
       ->andWhere('a.date >= :datem') // Date supérieur à :datem
+      ->andWhere('a.authorpoints >= :points')
 	  ->setParameter('date', $date)
 	  ->setParameter('datem', $datem)
+      ->setParameter('points', 0)
       ->getQuery()
       ->getResult()
       ;

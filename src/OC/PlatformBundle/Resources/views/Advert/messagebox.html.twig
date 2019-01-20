@@ -6,13 +6,15 @@
 
 {% for message in messages %}
 
-<a href="{{ path('oc_platform_editstat', {'id': message.id}) }}">Mettre à jour mes statistiques pour ce matche</a>
+{% if message.authorpoints > 0 %}
+<p>Mettre à jour mes statistiques pour ce matche</p>
 <form action="{{ path('oc_platform_editstat', {'id': message.id}) }}" method="post">
   Matches perdu: <input type="text" name="userreceivedpoints"><br>
   Matches gagner: <input type="text" name="authorpoints"><br>
   <input type="submit" value="Submit">
 </form>
 <br />
+{% endif %}
 <h2>{{ message.title }}</h2><br />
 Message
 <p>

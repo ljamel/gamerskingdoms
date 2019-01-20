@@ -8,18 +8,23 @@
         <div class="row">
 			<div class="col-md-4">
 				<div class="nk-match-score bg-dark-3">
-					En direct
+					Défis terminer
 				</div>
 				<div class="nk-gap-2"></div>
 				<div class="nk-widget-match p-0">
 					<div class="nk-widget-match-teams">
-						<div class="nk-widget-match-team-logo">
-							<img src="{{ path('oc_platform_link') }}../../images/{{defidirect.author}}avatar.jpg" alt="">
-						</div>
+                        <a href="{{ path('oc_platform_user', {'user': defidirect.author}) }}" class="nk-post-image"> 
+                            <div class="nk-widget-match-team-logo">
+                                <img src="{{ path('oc_platform_link') }}../../images/{{defidirect.author}}avatar.jpg" alt="">
+                            </div>
+                            {{defidirect.author}}
+                        </a>
 						<div class="nk-widget-match-vs">VS</div>
-						<div class="nk-widget-match-team-logo">
-							<img src="{{ path('oc_platform_link') }}../../images/{{defidirect.userreceived}}avatar.jpg" alt="">
-						</div>
+                        <a href="{{ path('oc_platform_user', {'user': defidirect.userreceived}) }}" class="nk-post-image">                 {{defidirect.userreceived}}
+                            <div class="nk-widget-match-team-logo">
+                                <img src="{{ path('oc_platform_link') }}../../images/{{defidirect.userreceived}}avatar.jpg" alt="">
+                            </div>
+                        </a>
 					</div>
 				</div>
 				<div class="nk-gap-2"></div>

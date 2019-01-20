@@ -737,6 +737,7 @@ class AdvertController extends Controller
     if ($request->isMethod('POST') && $form->handleRequest($request)) {
 	  $advert->setUserreceived($id);
 	  $advert->setAuthor($this->getUser());
+	  $advert->setAuthorpoints(1);
       $em = $this->getDoctrine()->getManager();
       $em->persist($advert);
       $em->flush();

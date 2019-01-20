@@ -65,7 +65,7 @@
 		<table class="table table-hover table-dark">
 			<tbody>
 				<tr>
-                    {% for user in userstat|sort %}
+                    {% for user in userstat %}
                     <td  class="statp"><a href="{{ path('oc_platform_user', {'user': user.username}) }}">{{user.username}}</a> <br />
                         <span>{{user.points}}<br />Points</span> 
                     </td>
@@ -89,7 +89,7 @@
 
 			<tbody>
 				<tr>
-                    {% for user in userstat|sort %}
+                    {% for user in userstat %}
                     <td  class="statp"><a href="{{ path('oc_platform_user', {'user': user.username}) }}">{{user.username}}</a> <br />
                         <span>{{user.points}}<br />Points</span> 
                     </td>
@@ -142,11 +142,15 @@
 				<div class="nk-widget-match p-0">
 					<div class="nk-widget-match-teams">
 						<div class="nk-widget-match-team-logo">
-							<img src="{{ path('oc_platform_link') }}../../images/{{defidirect.author}}avatar.jpg" alt="">
+                            <a href="{{ path('oc_platform_user', {'user': defidirect.author}) }}" class="nk-post-image">
+				                <img src="{{ path('oc_platform_link') }}../../images/{{defidirect.author}}avatar.jpg" alt="">
+                            </a>
 						</div>
 						<div class="nk-widget-match-vs">VS</div>
 						<div class="nk-widget-match-team-logo">
-							<img src="{{ path('oc_platform_link') }}../../images/{{defidirect.userreceived}}avatar.jpg" alt="">
+                            <a href="{{ path('oc_platform_user', {'user': defidirect.userreceived}) }}" class="nk-post-image">
+				                <img src="{{ path('oc_platform_link') }}../../images/{{defidirect.userreceived}}avatar.jpg" alt="">
+                            </a>
 						</div>
 					</div>
 				</div>

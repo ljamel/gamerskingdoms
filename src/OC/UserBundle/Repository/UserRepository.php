@@ -16,8 +16,8 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
   public function getUsers($page, $nbPerPage)
   {
 	if(is_numeric($page)) {
-		$query = $this->createQueryBuilder('c')
-		  ->orderBy('c.points', 'DESC')
+		$query = $this->createQueryBuilder('a')
+		  ->orderBy('a.points', 'DESC')
 		  ->getQuery()
 		;
 
