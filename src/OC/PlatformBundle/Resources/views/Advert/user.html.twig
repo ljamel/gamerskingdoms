@@ -23,8 +23,8 @@
                     <h1>Profil</h1>
 					
 					{% if bioview.title is defined %}
-					{{bioview.title}}
-					{{bioview.content|raw}}
+                        {{bioview.title}}
+                        {{bioview.content|raw}}
 					
 						{% if app.user == user.username %}
 						<a href="{{ path('oc_platform_edit', {'slug': user.username ~ 'bio'}) }}" class="btn btn-default"> Modifier </a>
@@ -67,7 +67,7 @@
                                     <tr>
                                         <td><strong class="h5">Mail:</strong>&nbsp;&nbsp;&nbsp;</td>
                                         <td><strong class="h5">{{ user.email }}</strong></td>
-                                    </tr>
+                                    </tr>                                    
                                     <tr>
 										{% set i=0 %}
 										{% for likess in user.likes %}
@@ -75,6 +75,25 @@
 										{% endfor %}
                                         <td><strong class="h5"><a class="likeme" href="{{ path('oc_platform_like', {'id': user.id}) }}" class="btn btn-default"><i class="far fa-thumbs-up"></i> j'aime:</a></strong>&nbsp;&nbsp;&nbsp;</td>
                                         <td><strong class="h5">{{i}}</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong class="h5">
+                                            {% if teamview.title is defined %}
+                                            
+                                            <a class="likeme" href="{{ path('oc_platform_view', {'slug': teamview.slug}) }}" class="btn btn-default">{{teamview.title}}:</a>
+                                            </strong>&nbsp;&nbsp;&nbsp;</td>
+                                            <td><strong class="h5">
+                                            {% if teamlink.userid is defined %}
+                                              
+                                            {% else %}
+                                                {% if  teamview.slug is defined %}
+                                                  <a href="{{ path('oc_platform_rejoin', {'link': teamview.slug}) }}" >
+                                                  Rejoindre la team
+                                                  </a>
+                                                {% endif %}
+                                            {% endif %}
+                                            {% endif %}
+                                            </strong></td>
                                     </tr>
                                     </tbody>				
                                 </table>
@@ -250,35 +269,38 @@
               </div><!-- /. box -->
             </div><!-- /.col -->
 
-
 <br />
 <br /> 
 
 <a href="{{ path('fos_user_security_logout')}}">Déconnection</a>
-
-
+<br />
 
 {% endif %}
 
-
-{% if teamview.title is defined %}
-{{teamview.title}} teeam
-{{teamview.content|raw}} teeam
-{% else %}
-
-<a href="{{ path('fos_user_group_new')}}"> Crée une team </a> 
-
+{% if user.username == app.user and teamview.slug is defined %}
+    <p><a href="{{ path('oc_platform_edit', {'slug': teamview.slug}) }}" class="btn btn-default">
+          <i class="glyphicon glyphicon-edit"></i>
+          Modifier ma team
+        </a>
+    </p>
+{% endif %}
 <p>Ci dessous description de la team</p>
-{{ include("OCPlatformBundle:Advert:form.html.twig") }}
-{% endif %}
+{% if teamview.title is defined %}
+    {{teamview.title}}
+    {{teamview.content|raw}}
 
-<p>Affiche la liste de tous les menbres du groupe</p>
+    {% elseif user.username == app.user and teamview.slug is defined %}
+  
 
-{% for user in teamviewusers %}
-{{user.userid}} menbre du groupe
-{% endfor %}
+    <p> Crée une team </p> 
+    {{ include("OCPlatformBundle:Advert:form.html.twig") }}
+    {% endif %}
 
+    <p>Affiche la liste de tous les menbres du groupe</p>
+
+    {% for user in teamviewusers %}
+    {{user.userid}} <br />
+    {% endfor %}
 
 
 {% endblock %}
-

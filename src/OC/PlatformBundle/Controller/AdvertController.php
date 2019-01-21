@@ -319,7 +319,7 @@ class AdvertController extends Controller
 	$user=$userManager->finduserBy(array('username' => $user));
 	// récupérer l'utilisateur courant
 	$useractive=$this->getUser($user);
-	$advert = $userManager->findUserBy(array('id' => $user->getId()));
+	$advert = $userManager->findUserBy(array('id' => (int)$user->getId()));
             
     $nbPerPage = 3;
     $page = 1;
@@ -329,6 +329,8 @@ class AdvertController extends Controller
     $listAdverts = $bdd->getRepository('OCPlatformBundle:Advert')->getAdverts(1, $nbPerPage);
 	  
 	$link = $bdd->getRepository('OCPlatformBundle:Friends')->findBy(array('userid' => $user->getId()));
+      
+	$teamlink = $bdd->getRepository('OCPlatformBundle:Team')->findOneBy(array('userid' => (string)$this->getUser()));
 	  
 	$linkwaitings = $bdd->getRepository('OCPlatformBundle:Friends')->findBy(array('friendswaitingid' => 3));
 	
@@ -361,7 +363,7 @@ class AdvertController extends Controller
 	 
 	// Servira de lien entre le groupe et l'article
 	$random = random_bytes(15);
-	 $random2 = sha1($random);
+    $random2 = sha1($random);
 	  
 	$teamc = new Advert();
 	$advertlink = new Team();
@@ -423,7 +425,31 @@ class AdvertController extends Controller
 	  'teamview'    => $teamview,
 	  'teamviewusers' => $teamviewusers,
       'bioview'        => $bioview,
+      'teamlink'        => $teamlink,
     ));
+  }
+    
+  public function rejoinAction(Request $request, $link) {
+      // verifi si le visiteur est connecter sinon sa renvoi à la page /login
+	  $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+      
+      $userManager = $this->get('fos_user.user_manager');
+      // récupérer l'utilisateur courant
+      $user=$this->getUser();
+      
+      $em = $this->getDoctrine()->getManager();
+      $advertlink = new Team();	  
+      // pour le lien entre le contenue est le groupe
+      $em = $this->getDoctrine()->getManager();
+	  $advertlink->setUserid($user);
+	  $advertlink->setGradesid('member');
+	  $advertlink->setFriendswaitingid(1);
+	  $advertlink->setAdvertid($link);
+      $em->persist($advertlink);
+      $em->flush();
+      
+      $request->getSession()->getFlashBag()->add('notice', 'Vous avez rejoin la team');
+	  return $this->redirectToRoute('oc_platform_user', array('user' => (string)$user));
   }
     
   public function likeAction($id) {

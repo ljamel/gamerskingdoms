@@ -18,11 +18,14 @@
 
   <h2>{{ advert.title }}</h2>
 		  {% if advert.image is not null %}
-		    <img src="{{ advert.image.url }}" alt="{{ advert.image.alt }}">
+		    <img class="banner2" src="{{ advert.image.url }}" alt="{{ advert.image.alt }}">
 		  {% endif %}
   <div class="well">
     {{ advert.content|raw }}
   </div>
+    {% if  teamview.slug is defined %}
+        <a href="{{ path('oc_platform_rejoin', {'link': teamview.slug}) }}" >Rejoindre la team</a>
+    {% endif %}
   {% if not advert.categories.empty %}
     <p>
       Cette annonce est parue dans les catégories suivantes :
@@ -51,11 +54,11 @@
     </a>
     <a href="{{ path('oc_platform_edit', {'slug': advert.slug}) }}" class="btn btn-default">
       <i class="glyphicon glyphicon-edit"></i>
-      Modifier l'annonce
+      Modifier
     </a>
     <a href="{{ path('oc_platform_delete', {'id': advert.id}) }}" class="btn btn-danger">
       <i class="glyphicon glyphicon-trash"></i>
-      Supprimer l'annonce
+      Supprimer
     </a>
   </p>
 {% endif %}

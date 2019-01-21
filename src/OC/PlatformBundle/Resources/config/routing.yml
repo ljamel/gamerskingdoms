@@ -160,6 +160,11 @@ oc_platform_editstat:
     defaults:
         _controller: AppBundle:User:editstat
 
+oc_platform_rejoin:
+    path:      /rejoin/{link}
+    defaults:
+        _controller: OCPlatformBundle:Advert:rejoin
+
 oc_platform_registernew:
     path:      /register/
     defaults:

@@ -151,6 +151,13 @@ td:hover {
 	background-size: cover;
 }
 
+.banner2 {
+	height: 259px;
+	overflow: hidden;
+	background-image: url('/web/images/evolve_keyart_L_2.jpg');
+	background-size: cover;
+}
+
 .title-banner {
 	margin-left: 15%;
 }
