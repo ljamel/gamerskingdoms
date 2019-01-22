@@ -42,8 +42,8 @@
 
 			<tbody>
 				<tr>
-                    {% for user in userstat %}
-                    <td  class="statp"><a href="{{ path('oc_platform_user', {'user': user.username}) }}">{{user.username}}</a> <br />
+                    {% for user in userstatcomputer %}
+                    <td  class="statp"><a href="{{ path('oc_platform_user', {'user': user.username|e}) }}">{{user.username|e}}</a> <br />
                         <span>{{user.points}}<br />Points</span> 
                     </td>
                     {% endfor %}
@@ -89,7 +89,7 @@
 
 			<tbody>
 				<tr>
-                    {% for user in userstat %}
+                    {% for user in userstatxbox %}
                     <td  class="statp"><a href="{{ path('oc_platform_user', {'user': user.username}) }}">{{user.username}}</a> <br />
                         <span>{{user.points}}<br />Points</span> 
                     </td>

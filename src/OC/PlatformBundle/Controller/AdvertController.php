@@ -49,7 +49,19 @@ class AdvertController extends Controller
     $userstat = $this->getDoctrine()
       ->getManager()
       ->getRepository('OC\UserBundle\Entity\User')
-      ->getUsers($page, 5)
+      ->findBy(array('console' => 'playstation'), array('points' => 'desc'),5,0)
+    ;
+    
+    $userstatcomputer = $this->getDoctrine()
+      ->getManager()
+      ->getRepository('OC\UserBundle\Entity\User')
+      ->findBy(array('console' => 'computer'), array('points' => 'desc'),5,0)
+    ;
+    
+    $userstatxbox = $this->getDoctrine()
+      ->getManager()
+      ->getRepository('OC\UserBundle\Entity\User')
+      ->findBy(array('console' => 'xbox'), array('points' => 'desc'),5,0)
     ;
 
       
@@ -125,6 +137,8 @@ class AdvertController extends Controller
 	  'wait'		=> $wait,
       'users'       => $userss,
       'userstat'    => $userstat,
+      'userstatcomputer'    => $userstatcomputer,
+      'userstatxbox'    => $userstatxbox,
       'defidirects' => $defidirects,
     ));
   }  
