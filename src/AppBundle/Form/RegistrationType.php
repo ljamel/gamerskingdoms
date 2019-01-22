@@ -26,6 +26,21 @@ class RegistrationType extends AbstractType
                 'required' => true,
             )
         );
+        
+        $builder->add('console', ChoiceType::class, [
+            'choices' => [
+                'Main Statuses' => [
+                    'xbox' => 'xbox',
+                    'playstation' => 'playstation',
+                    'computer' => 'computer',
+                ],
+                'Out of Stock Statuses' => [
+                    'nintendo' => 'nintendo',
+                    'other' => 'other',
+                ],
+            ],
+        ]);
+
 		
     }
 

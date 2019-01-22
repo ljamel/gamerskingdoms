@@ -14,6 +14,7 @@
         </a>
         
         {% endif %}
+
         <p>{{user.content|raw }}</p> 
         <p>Administateur du groupe<a href="{{ path('oc_platform_user', {'user': user.author}) }}">{{user.author}}</a></p>
         <h3 class="nk-decorated-h-2"></h3>

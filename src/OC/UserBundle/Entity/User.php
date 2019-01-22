@@ -36,6 +36,10 @@ class User extends BaseUser
     */
   protected $likes;
 	
+	/**
+    * @ORM\Column(name="console")
+    */
+  protected $console;
 	
   protected $user_target;
   
@@ -76,6 +80,22 @@ class User extends BaseUser
   public function getPoints()
   {
     return $this->points;
+  }  
+    
+  public function setConsole($console)
+  {
+    $this->console = $console;
+  }  
+    
+  public function addConsole($console)
+  {
+    $this->console[] = $console;
+  }
+
+
+  public function getConsole()
+  {
+    return $this->console;
   }
 
 }

@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use OC\PlatformBundle\Validator\Antiflood;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -49,6 +50,10 @@ class User extends BaseUser
    */
     protected $points;
 	
+    	/**
+    * @ORM\Column(name="console")
+    */
+  protected $console;
 
 	public function getRoles(): array
 	{
@@ -90,6 +95,11 @@ class User extends BaseUser
   public function getPoints()
   {
     return $this->points;
+  }
+
+  public function addConsole($console)
+  {
+    $this->console[] = $console;
   }
 
 }

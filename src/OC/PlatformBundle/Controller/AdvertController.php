@@ -40,7 +40,6 @@ class AdvertController extends Controller
     $nbPages = ceil(count($countuser) / $nbPerPage);
 	  
     // affichage du top 5
-    // Ne pas oublier d'incrementer tous les points en base de donner user
 	$userss = $this->getDoctrine()
       ->getManager()
       ->getRepository('OC\UserBundle\Entity\User')
@@ -315,7 +314,8 @@ class AdvertController extends Controller
 	  
   	// Pour récupérer le service UserManager du bundle
 	$userManager = $this->get('fos_user.user_manager');
-	  	
+	  
+    $userp = $user;
 	$user=$userManager->finduserBy(array('username' => $user));
 	// récupérer l'utilisateur courant
 	$useractive=$this->getUser($user);
@@ -331,6 +331,10 @@ class AdvertController extends Controller
 	$link = $bdd->getRepository('OCPlatformBundle:Friends')->findBy(array('userid' => $user->getId()));
       
 	$teamlink = $bdd->getRepository('OCPlatformBundle:Team')->findOneBy(array('userid' => (string)$this->getUser()));
+      
+	$isteam = $bdd->getRepository('OCPlatformBundle:Team')->findOneBy(array('userid' => $userp));
+      
+	$myteam = $bdd->getRepository('OCPlatformBundle:Team')->findOneBy(array('userid' => (string)$useractive));
 	  
 	$linkwaitings = $bdd->getRepository('OCPlatformBundle:Friends')->findBy(array('friendswaitingid' => 3));
 	
@@ -345,12 +349,15 @@ class AdvertController extends Controller
 		$friendsallow = $bdd->getRepository('OCPlatformBundle:Friends')->findBy(array('friendsid' => $user->getId(), 'friendswaitingid' => 1));
 	}
 	  
-	  
+	if(!empty($myteam)) {
+        $myteam = $bdd->getRepository('OCPlatformBundle:advert')->findOneBy(array('slug' => (string)$myteam->getAdvertid()));
+    }
 	if(empty($teamview)) {
 		$teamviewusers = 'ok';
 	} else {
-		$teamviewusers = $bdd->getRepository('OCPlatformBundle:Team')->findBy(array('advertid' => $teamview->getSlug())); 	
+		$teamviewusers = $bdd->getRepository('OCPlatformBundle:Team')->findBy(array('advertid' => $teamview->getSlug())); 	 	
 	}	
+      
 	  
 	$metas = $bdd
       ->getRepository('OCPlatformBundle:Advert')
@@ -426,6 +433,8 @@ class AdvertController extends Controller
 	  'teamviewusers' => $teamviewusers,
       'bioview'        => $bioview,
       'teamlink'        => $teamlink,
+      'isteam'        => $isteam,
+      'myteam'      => $myteam,
     ));
   }
     
@@ -437,19 +446,37 @@ class AdvertController extends Controller
       // récupérer l'utilisateur courant
       $user=$this->getUser();
       
-      $em = $this->getDoctrine()->getManager();
-      $advertlink = new Team();	  
-      // pour le lien entre le contenue est le groupe
-      $em = $this->getDoctrine()->getManager();
-	  $advertlink->setUserid($user);
-	  $advertlink->setGradesid('member');
-	  $advertlink->setFriendswaitingid(1);
-	  $advertlink->setAdvertid($link);
-      $em->persist($advertlink);
-      $em->flush();
+      $bdd = $this->getDoctrine()->getManager();
+      $teamview = $bdd->getRepository('OCPlatformBundle:Team')->findOneBy(array('userid' => (string)$user->getUsername()));
       
-      $request->getSession()->getFlashBag()->add('notice', 'Vous avez rejoin la team');
-	  return $this->redirectToRoute('oc_platform_user', array('user' => (string)$user));
+      if(empty($teamview)) {              
+          $advertlink = new Team();	  
+          // pour le lien entre le contenue est le groupe
+          $em = $this->getDoctrine()->getManager();
+          $advertlink->setUserid($user);
+          $advertlink->setGradesid('member');
+          $advertlink->setFriendswaitingid(1);
+          $advertlink->setAdvertid($link);
+          $em->persist($advertlink);
+          $em->flush();
+          
+          $request->getSession()->getFlashBag()->add('notice', 'Vous avez rejoin la team');
+          return $this->redirectToRoute('oc_platform_user', array('user' => (string)$user)); 
+      } else {
+          $advertlink = new Team();	  
+          // pour le lien entre le contenue est le groupe
+          $em = $this->getDoctrine()->getManager();
+          $advertlink->setUserid($user);
+          $advertlink->setGradesid('member');
+          $advertlink->setFriendswaitingid(1);
+          $advertlink->setAdvertid($link);
+          $em->persist($advertlink);
+          $em->remove($teamview);
+          $em->flush();
+          $request->getSession()->getFlashBag()->add('notice', 'Vous avez rejoin une autre team');
+          return $this->redirectToRoute('oc_platform_user', array('user' => (string)$user)); 
+      }
+      
   }
     
   public function likeAction($id) {

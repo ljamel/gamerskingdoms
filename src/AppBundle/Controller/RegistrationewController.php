@@ -41,6 +41,7 @@ class RegistrationewController extends Controller
 
         $form = $formFactory->createForm();
         $form->setData($user);
+        $form->remove('roles');
 		
         $form->handleRequest($request);
 

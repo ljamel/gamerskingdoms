@@ -78,11 +78,11 @@
                                     </tr>
                                     <tr>
                                         <td><strong class="h5">
-                                            {% if teamview.title is defined %}
-                                            
-                                            <a class="likeme" href="{{ path('oc_platform_view', {'slug': teamview.slug}) }}" class="btn btn-default">{{teamview.title}}:</a>
-                                            </strong>&nbsp;&nbsp;&nbsp;</td>
-                                            <td><strong class="h5">
+                                            {% if isteam.userid is defined %}
+                                                TEAM:
+                                                </strong>&nbsp;&nbsp;&nbsp;</td>
+                                                <td><strong class="h5">
+                                                <a class="likeme" href="{{ path('oc_platform_view', {'slug': isteam.advertid}) }}" class="btn btn-default">{{myteam.title}}</a>
                                             {% if teamlink.userid is defined %}
                                               
                                             {% else %}
@@ -299,7 +299,8 @@
     <p>Affiche la liste de tous les menbres du groupe</p>
 
     {% for user in teamviewusers %}
-    {{user.userid}} <br />
+        <br />
+        <a href="{{ path('oc_platform_user', {'user': user.userid}) }}">{{user.userid}}</a>
     {% endfor %}
 
 

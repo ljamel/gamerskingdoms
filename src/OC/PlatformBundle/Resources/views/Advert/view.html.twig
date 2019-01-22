@@ -46,6 +46,15 @@
     </div>
   {% endif %}
   <i>Par {{ advert.author }}, le {{ advert.date|date('d/m/Y') }}</i>
+
+        {% if  app.user != advert.author and advert.team is defined  %}
+            <p>
+                <a href="{{ path('oc_platform_rejoin', {'link': advert.slug}) }}" >
+                Rejoindre la team
+                </a>
+            </p>
+        {% endif %}
+
 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
   <p>
     <a href="{{ path('oc_platform_home') }}" class="btn btn-default">
@@ -63,7 +72,6 @@
   </p>
 {% endif %}
 
-// mon commentaire est afficher en dessous penser a ajouter un lien
 {% for comment in comments %}
 
 <p>{{comment.title}}</p>
