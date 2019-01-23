@@ -273,6 +273,42 @@ class AdvertController extends Controller
 	  'comments'    => $comments, 
     ));
   }  
+   /**
+   * @Security("has_role('ROLE_ADMIN')")
+   */
+  public function admincontentAction($page)
+  {
+    // verifi si le visiteur est connecter sinon sa renvoi à la page /login
+	$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+	// Pour récupérer le service UserManager du bundle
+	$userManager = $this->get('fos_user.user_manager');
+	  
+	// Pour récupérer la liste de tous les utilisateurs
+    $users = $userManager->findUsers();
+    $nbPerPage = 6; // la pagination fonctionne---------------------------èàç-rè"'-('ç"_è(-àé"'àç__çèàç-_ç))
+    $listAdverts = $this->getDoctrine()
+      ->getManager()
+      ->getRepository('OCPlatformBundle:Advert')
+      ->getAdverts($page, $nbPerPage)
+    ;
+	  
+    // Récupération des AdvertSkill de l'annonce
+    $comments = $this->getDoctrine()
+      ->getManager()
+      ->getRepository('OCPlatformBundle:Comment')
+      ->findBy(array('published' => 1))
+    ;
+    // On calcule le nombre total de pages grâce au count($listAdverts) qui retourne le nombre total d'annonces
+    $nbPages = ceil(count($listAdverts) / $nbPerPage);
+    // On donne toutes les informations nécessaires à la vue
+    return $this->render('OCPlatformBundle:Advert:admincontent.html.twig', array(
+      'listAdverts' => $listAdverts,
+      'nbPages'     => $nbPages,
+      'page'        => $page,
+      'users'       => $users,
+	  'comments'    => $comments, 
+    ));
+  }  
 	
   public function alluserAction($page, $p)
   {

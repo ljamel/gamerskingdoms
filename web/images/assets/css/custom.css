@@ -301,6 +301,8 @@ td.statp {
     color: white;
 }
 
+
+
 @media (max-width: 560px) {
     .nk-teammate-card .nk-teammate-card-info > table > tbody > tr + tr > td {
          border-top: none; 

@@ -50,6 +50,14 @@ oc_platform_admin:
     requirements:
         id: \d+
 
+oc_platform_admincontent:
+    path:      /admincontent/{page}
+    defaults:
+        _controller: OCPlatformBundle:Advert:admincontent
+        page:        1
+    requirements:
+        id: \d+
+
 # Jai réussi à faire fonctionner la pagination
 oc_platform_alluser:
     path:      /alluser/{page}{p}
