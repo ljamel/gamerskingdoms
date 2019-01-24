@@ -235,6 +235,12 @@ class AdvertController extends Controller
     return $this->render('OCPlatformBundle:Advert:translation.html.twig', array(
       'name' => $name
     ));
+  }
+  
+  public function mentionAction()
+  {
+    return $this->render('OCPlatformBundle:Advert:mention-legal.html.twig', array(
+    ));
   }	
 	
    /**
@@ -250,27 +256,51 @@ class AdvertController extends Controller
 	// Pour récupérer la liste de tous les utilisateurs
     $users = $userManager->findUsers();
     $nbPerPage = 6; // la pagination fonctionne---------------------------èàç-rè"'-('ç"_è(-àé"'àç__çèàç-_ç))
+	  
+    $comments = $this->getDoctrine()
+      ->getManager()
+      ->getRepository('OCPlatformBundle:Comment')
+      ->getPagination($page, $nbPerPage)
+    ;
+      
     $listAdverts = $this->getDoctrine()
       ->getManager()
       ->getRepository('OCPlatformBundle:Advert')
       ->getAdverts($page, $nbPerPage)
     ;
-	  
-    // Récupération des AdvertSkill de l'annonce
-    $comments = $this->getDoctrine()
+      
+    $nbPages = ceil(count($comments) / $nbPerPage);
+      
+    $userscount = $this->getDoctrine()
       ->getManager()
-      ->getRepository('OCPlatformBundle:Comment')
-      ->findBy(array('published' => 1))
+      ->getRepository('OC\UserBundle\Entity\User')
+      ->getUsers($page, $nbPerPage)
     ;
-    // On calcule le nombre total de pages grâce au count($listAdverts) qui retourne le nombre total d'annonces
-    $nbPages = ceil(count($listAdverts) / $nbPerPage);
+    $userscount = ceil(count($userscount));
+      
+    $advertscount = ceil(count($listAdverts));
+      
+    $time = date('Y-m-d H:i:s');
+      // La liste des défis en direct 
+    $defidirects = $this->getDoctrine()
+      ->getManager()
+      ->getRepository('OC\UserBundle\Entity\Messages')
+      ->getDefisall($time)
+    ;
+    $defiscount = ceil(count($defidirects));
+      
+    $tickets = $this->getDoctrine()->getRepository('OC\UserBundle\Entity\Messages')->findBy(array('userreceived' => 'admin'));
+    $tickets = ceil(count($tickets));
     // On donne toutes les informations nécessaires à la vue
     return $this->render('OCPlatformBundle:Advert:admin.html.twig', array(
-      'listAdverts' => $listAdverts,
       'nbPages'     => $nbPages,
       'page'        => $page,
       'users'       => $users,
 	  'comments'    => $comments, 
+      'userscount'  => $userscount,  
+      'advertscount'  => $advertscount,  
+      'defiscount'  => $defiscount,
+      'tickets'     => $tickets,
     ));
   }  
    /**
@@ -307,6 +337,35 @@ class AdvertController extends Controller
       'page'        => $page,
       'users'       => $users,
 	  'comments'    => $comments, 
+    ));
+  }    
+    
+  /**
+   * @Security("has_role('ROLE_ADMIN')")
+   */
+  public function adminuserAction($page)
+  {
+	// Pour récupérer le service UserManager du bundle
+	$userManager = $this->get('fos_user.user_manager');
+    $nbPerPage = 6; // la pagination fonctionne---------------------------èàç-rè"'-('ç"_è(-àé"'àç__çèàç-_ç))
+	// Pour récupérer la liste de tous les utilisateurs
+    $countuser = $userManager->findUsers();
+  
+    // On calcule le nombre total de pages grâce au count($listAdverts) qui retourne le nombre total d'annonces
+    $nbPages = ceil(count($countuser) / $nbPerPage);
+	  
+	$users = $this->getDoctrine()
+      ->getManager()
+      ->getRepository('OC\UserBundle\Entity\User')
+      ->getUsers($page, $nbPerPage)
+    ;
+    // On calcule le nombre total de pages grâce au count($listAdverts) qui retourne le nombre total d'annonces
+    $nbPages = ceil(count($users) / $nbPerPage);
+    // On donne toutes les informations nécessaires à la vue
+    return $this->render('OCPlatformBundle:Advert:adminuser.html.twig', array(
+      'nbPages'     => $nbPages,
+      'page'        => $page,
+      'users'       => $users,
     ));
   }  
 	

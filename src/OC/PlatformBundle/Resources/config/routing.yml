@@ -16,6 +16,11 @@ oc_platform_updateavatar:
     defaults:
         _controller: OCPlatformBundle:Advert:updateavatar
 
+oc_platform_mention:
+    path:      /mention/
+    defaults:
+        _controller: OCPlatformBundle:Advert:mention
+
 oc_platform_allteams:
     path:      /teams/
     defaults:
@@ -54,6 +59,14 @@ oc_platform_admincontent:
     path:      /admincontent/{page}
     defaults:
         _controller: OCPlatformBundle:Advert:admincontent
+        page:        1
+    requirements:
+        id: \d+
+
+oc_platform_adminuser:
+    path:      /adminuser/{page}
+    defaults:
+        _controller: OCPlatformBundle:Advert:adminuser
         page:        1
     requirements:
         id: \d+

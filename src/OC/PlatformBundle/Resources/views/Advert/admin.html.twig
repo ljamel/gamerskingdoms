@@ -4,7 +4,7 @@
 <!-- TODO ajouter un autre layout pour l'administation et les page views -->
 
 {% include 'admin.html.twig' %}
-                          
+                     
 <h2>Administration</h2>
 <div class="row">
                 <div class="col-lg-3 col-md-6">
@@ -15,12 +15,12 @@
                                     <i class="fa fa-comments fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">26</div>
-                                    <div>New Comments!</div>
+                                    <div class="huge">{{advertscount}}</div>
+                                    <div>Publications</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="{{path('oc_platform_admincontent')}}">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -37,12 +37,12 @@
                                     <i class="fa fa-tasks fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">12</div>
-                                    <div>New Tasks!</div>
+                                    <div class="huge">{{userscount}}</div>
+                                    <div>Utilisateurs</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="{{path('oc_platform_adminuser')}}">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -56,15 +56,15 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-shopping-cart fa-5x"></i>
+                                    <i class="fa fa-gamepad fa-5x" aria-hidden="true"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">124</div>
-                                    <div>New Orders!</div>
+                                    <div class="huge">{{defiscount}}</div>
+                                    <div>Défis</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="{{ path('oc_platform_tournament') }}">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -81,12 +81,12 @@
                                     <i class="fa fa-support fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">13</div>
+                                    <div class="huge">{{tickets}}</div>
                                     <div>Support Tickets!</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="{{path('oc_platform_user', {'user': 'admin'})}}">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -114,75 +114,13 @@
 <div class="row">
 	<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 		<ul class="nav nav-tabs nav-justified">
-			<li class="active"><a href="#articles" data-toggle="tab">Articles</a></li>
-			<li><a href="#comments" data-toggle="tab">Comments</a></li>
-			<li><a href="#users" data-toggle="tab">Users</a></li>
+			<li><a href="#comments" data-toggle="tab">Commentaires</a></li>
 		</ul>
 	</div>
 </div>
-<div class="tab-content">
-	<div class="tab-pane fade in active adminTable" id="articles">
-		{% if listAdverts %}
-		<div class="table-responsive">
-			<table class="table table-hover table-condensed">
-				<thead>
-					<tr>
-						<th>Title</th>
-						<th>Content</th>
-						<th></th>
-						<!-- Actions column -->
-					</tr>
-				</thead>
-				{% for article in listAdverts %}
-				<tr>
-					<td>
-						<a href="{{ path('oc_platform_view', {'slug': article.slug}) }}">{{ article.title }}</a></td>
-					<td>{{ article.content | truncate(50) }}</td>
-					<td>
-						<a href="{{ path('oc_platform_edit', { 'slug': article.slug }) }}" class="btn btn-info btn-xs" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
-						<button type="button" class="btn btn-danger btn-xs" title="Delete" data-toggle="modal" data-target="#articleDialog{{ article.id }}"><span class="glyphicon glyphicon-remove"></span>
-                        </button>
-						<div class="modal fade" id="articleDialog{{ article.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-										<h4 class="modal-title" id="myModalLabel">Confirmation</h4>
-									</div>
-									<div class="modal-body">
-										Voulez vous vraiment effacer ?
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-										<a href="{{ path('oc_platform_delete', { 'id': article.id }) }}" class="btn btn-danger">Confirm</a>
-									</div>
-								</div>
-								<!-- /.modal-content -->
-							</div>
-							<!-- /.modal-dialog -->
-						</div>
-						<!-- /.modal -->
-					</td>
-				</tr>
-				{% endfor %}
-			</table>
-		</div>
-		{% else %}
-		<div class="alert alert-warning">No articles found.</div>
-		{% endif %}
-		<a href="{{ path('oc_platform_add') }}"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add article</button></a>
-		<ul class="pagination">
-			{# On utilise la fonction range(a, b) qui crée un tableau de valeurs entre a et b #} {% for p in range(1, nbPages) %}
-			<li{% if p==page %} class="active" {% endif %}>
-				<a href="{{ path('oc_platform_admin', {'page': p}) }}">{{ p }}</a>
-			</li>
-			{% endfor %}
-		</ul>
-	</div>
+<div class="tab-content">	
 	
-	
-	
-	<div class="tab-pane fade adminTable" id="comments">
+	<div class="tab-pane adminTable active" id="comments">
 		<!-- TODO Insérer ici le code de gestion des commentaires -->
 			<div class="table-responsive">
 			<table class="table table-hover table-condensed">
@@ -242,61 +180,6 @@
 			{% endfor %}
 		</ul>
 	</div>
-	<div class="tab-pane fade adminTable" id="users">{% if users %}
-		<div class="table-responsive">
-			<table class="table table-hover table-condensed">
-				<thead>
-					<tr>
-						<th>Nom</th>
-						<th>Email</th>
-						<th>Role</th>
-						<th></th>
-						<!-- Actions column -->
-					</tr>
-				</thead>
-				{% for user in users %}
-				<tr>
-					<td>{{ user.username }}</td>
-					<td>{{ user.email }}</td>
-					<td>
-                        {{ user.roles|join('|') }}
-					</td>
-					<td>
-
-						<a href="{{ path('oc_platform_edituser', {'id': user.id}) }}" class="btn btn-info btn-xs" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
-						<button type="button" class="btn btn-danger btn-xs" title="Delete" data-toggle="modal" data-target="#userDialog{{ user.id }}"><span class="glyphicon glyphicon-remove"></span>
-                        </button>
-						<div class="modal fade" id="userDialog{{ user.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-										<h4 class="modal-title" id="myModalLabel">Confirmation needed</h4>
-									</div>
-									<div class="modal-body">
-										Do you really want to delete this user ?
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-										<a href="{{ path('oc_platform_deleteuser') }}/{{ user.username  }}" class="btn btn-danger">Confirm</a>
-									</div>
-								</div>
-								<!-- /.modal-content -->
-							</div>
-							<!-- /.modal-dialog -->
-						</div>
-						<!-- /.modal -->
-					</td>
-				</tr>
-				{% endfor %}
-			</table>
-		</div>
-		{% else %}
-		<div class="alert alert-warning">No users found.</div>
-		{% endif %}
-		<a href="{{ path('fos_user_registration_register') }}"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add user</button></a>
-
-	</div>
 </div>
                 </div>
             </div>
@@ -331,7 +214,6 @@
         </div>
     </div>
 
-</body>
     
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

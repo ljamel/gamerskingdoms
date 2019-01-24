@@ -4,6 +4,13 @@
 <p>Affichages des vidéos de tournoi</p>
 
         {% for defidirect in defidirects %}
+        {% if defidirect.authorpoints > defidirect.userreceivedpoints %}
+        {% set res = "Gagner" %}
+        {% set resn = "Perdu" %}
+        {% else %}
+        {% set res = "Perdu" %}
+        {% set resn = "Gagner" %}
+        {% endif %}
 
         <div class="row">
 			<div class="col-md-4">
@@ -13,14 +20,22 @@
 				<div class="nk-gap-2"></div>
 				<div class="nk-widget-match p-0">
 					<div class="nk-widget-match-teams">
-                        <a href="{{ path('oc_platform_user', {'user': defidirect.author}) }}" class="nk-post-image"> 
+                        <a href="{{ path('oc_platform_user', {'user': defidirect.author}) }}" class="nk-post-image">
+                            
                             <div class="nk-widget-match-team-logo">
                                 <img src="{{ path('oc_platform_link') }}../../images/{{defidirect.author}}avatar.jpg" alt="">
                             </div>
                             {{defidirect.author}}
+                            <p>{{res}}</p>
                         </a>
+                        
 						<div class="nk-widget-match-vs">VS</div>
-                        <a href="{{ path('oc_platform_user', {'user': defidirect.userreceived}) }}" class="nk-post-image">                 {{defidirect.userreceived}}
+                        
+                        
+                        <a href="{{ path('oc_platform_user', {'user': defidirect.userreceived}) }}" class="nk-post-image"> 
+                            <p>{{resn}}</p>
+                            {{defidirect.userreceived}}
+                            {{defidirect.userreceivedpoints}}
                             <div class="nk-widget-match-team-logo">
                                 <img src="{{ path('oc_platform_link') }}../../images/{{defidirect.userreceived}}avatar.jpg" alt="">
                             </div>
